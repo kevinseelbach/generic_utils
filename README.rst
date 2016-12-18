@@ -96,20 +96,9 @@ Run the test suite::
     nosetests tests
 
 
+TODO
+====
 
-Note, to combine the coverage data from all the tox environments run:
+- Add Dockerfiles for development
+- Python 3.5 compat
 
-.. list-table::
-    :widths: 10 90
-    :stub-columns: 1
-
-    - - Windows
-      - ::
-
-            set PYTEST_ADDOPTS=--cov-append
-            tox
-
-    - - Other
-      - ::
-
-            PYTEST_ADDOPTS=--cov-append tox
