@@ -54,7 +54,7 @@ setup(
     long_description=read('README.rst'),
     author='Kevin Seelbach',
     author_email='kevin.seelbach@gmail.com',
-    url='https://github.com/kevinvons/generic-utils',
+    url='https://github.com/kevinseelbach/generic_utils',
     packages=['generic_utils'],
     package_dir={'generic_utils': 'src/generic_utils'},
     #py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],

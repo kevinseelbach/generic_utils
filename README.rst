@@ -11,15 +11,15 @@ Overview
       - |version|
 
 
-.. |version| image:: https://img.shields.io/pypi/v/generic-utils.svg?style=flat
+.. |version| image:: https://img.shields.io/pypi/v/generic_utils.svg?style=flat
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/generic-utils
+    :target: https://pypi.python.org/pypi/generic_utils
 
 .. end-badges
 
 A set of generic utility classes and helper functions for Python  development.
 
-generic-utils is a set of generic Python utilities which currently target
+generic_utils is a set of generic Python utilities which currently target
 Python 2.7.X environments with no other required dependencies.  The code
 targets both general production code as well as test utilities to facilitate
 easier test generation, management and complexity.
@@ -36,12 +36,8 @@ Installation
 
 ::
 
-    pip install generic-utils
+    pip install generic_utils
 
-Documentation
-=============
-
-https://generic-utils.readthedocs.io/
 
 Development
 ===========
