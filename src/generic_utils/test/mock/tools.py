@@ -1,5 +1,6 @@
 """Tools for simplifying mocking of objects
 """
+import io
 import six
 from mock import patch
 from generic_utils.contextlib_ex import ExplicitContextManagerMixin, ContextDecorator, ExplicitContextDecorator
@@ -172,7 +173,7 @@ class PatchFilelikeResponse(ExplicitContextDecorator):
         else:
             self.patch_method = patch.object(self._patch_module, self._target_method)
 
-        self.open_file = open(self._filename, 'r')
+        self.open_file = io.open(self._filename, 'r')
         mock_method = self.patch_method.start()
         mock_method.return_value = self.open_file
 

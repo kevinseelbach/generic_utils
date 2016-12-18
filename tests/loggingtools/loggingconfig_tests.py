@@ -24,7 +24,7 @@ class LevelOverrideComparisonTestCases(TestCase):
 
         ### EXECUTION
         for left, right in TEST_CASES:
-            self.assertTrue(left > right)
+            self.assertTrue(left > right, "%r should be > %r" % (left.level, right.level))
             self.assertTrue(left != right)
             self.assertFalse(left == right)
             self.assertFalse(left < right)

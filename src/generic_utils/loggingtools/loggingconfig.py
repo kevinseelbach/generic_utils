@@ -7,6 +7,7 @@ import logging
 from . import getLogger
 import threading
 from generic_utils import NOTSET
+from generic_utils.mixins import comparable
 from generic_utils.classtools import get_instance_from_fqn
 from generic_utils.config import config
 from generic_utils.datetimetools import utcnow
@@ -15,7 +16,7 @@ from generic_utils.typetools import as_iterable
 LOG = getLogger()
 
 
-class LevelOverride(object):
+class LevelOverride(comparable.ComparableMixin):
     """Definition of a level override which can be applied to a log level dynamically to override the log level for a
     logger within a given scope/time frame.
     """
@@ -54,8 +55,11 @@ class LevelOverride(object):
             return logging.NOTSET
         return self._level
 
-    def __cmp__(self, other):
-        """Comparisons, such as "greater than", for a Level Override is determined not by level but by which is most
+    def _cmpkey(self):
+        """Logging constants are in reverse order, i.e. 10-Debug, 20-info, etc. Do some basic math to make this work
+        with Comparable ordering mixin.
+
+        Comparisons, such as "greater than", for a Level Override is determined not by level but by which is most
         specific and valid.  For instance a level override which is not expired will always be greater than one which
         is expired and an override with a lower log level will be greater than one with a bigger level because a lower
         level has higher override precedence than a higher log level since it is more permissive
@@ -63,24 +67,11 @@ class LevelOverride(object):
         """
         # A level of NOTSET is ignored and the operand is disqualified from comparisons unless both are NOTSET in which
         # case they are considered equal
-        my_level = self.level
-        try:
-            other_level = other.level
-        except AttributeError:
-            other_level = logging.NOTSET
-
-        if my_level is logging.NOTSET:
-            return 0 if other_level is logging.NOTSET else -1
+        base_level = self.level
+        if base_level is logging.NOTSET:
+            return -100
         else:
-            if other_level is logging.NOTSET:
-                return 1
-
-            if my_level == other_level:
-                return 0
-            elif my_level > other_level:
-                return -1
-            else:
-                return 1
+            return -1 * base_level
 
 
 class LogLevelProvider(object):

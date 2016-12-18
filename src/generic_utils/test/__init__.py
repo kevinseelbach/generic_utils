@@ -1,12 +1,13 @@
 """Utilities for writing tests
 """
+import six
 from builtins import str
 import threading
 
 import unittest
-import new
-from unittest.case import expectedFailure
 import types
+
+from unittest.case import expectedFailure
 from generic_utils import loggingtools
 from future.utils import with_metaclass
 
@@ -144,8 +145,13 @@ class TestCaseMixinMetaClass(type):
                 cls._thread_locals.__delattr__("current_test")
 
             # pylint: disable=attribute-defined-outside-init, invalid-name
-            cls.setUp = new.instancemethod(cb_wrapped_setUp, None, cls)
-            cls.tearDown = new.instancemethod(cb_wrapped_tearDown, None, cls)
+            if six.PY2:
+                import new
+                cls.setUp = new.instancemethod(cb_wrapped_setUp, None, cls)
+                cls.tearDown = new.instancemethod(cb_wrapped_tearDown, None, cls)
+            else:
+                cls.setUp = cb_wrapped_setUp
+                cls.tearDown = cb_wrapped_tearDown
 
             cls._core_test_methods_overridden = True
 

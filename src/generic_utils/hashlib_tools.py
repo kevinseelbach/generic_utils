@@ -2,6 +2,7 @@
 Tools for using hashlib
 """
 import hashlib
+from generic_utils import five
 
 
 def get_chunked_hash(filelike_obj, chunk_size=8192, hash_func=hashlib.sha256):
@@ -22,5 +23,6 @@ def get_chunked_hash(filelike_obj, chunk_size=8192, hash_func=hashlib.sha256):
         data = filelike_obj.read(chunk_size)
         if not data:
             break
+        data = five.b(data)
         hasher.update(data)
     return hasher.hexdigest()

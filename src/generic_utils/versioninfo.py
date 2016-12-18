@@ -7,6 +7,8 @@ import os
 import re
 import hashlib
 from functools import reduce
+
+from generic_utils import five
 from generic_utils.mixins import comparable
 
 VERSION_PATTERN_PREFIX = "__version_"
@@ -258,7 +260,7 @@ class GuidMixin(object):
     """Extend classes with a guid concept for uniqueness.
     """
     hashing_fnc = hashlib.sha256
-    GUID_INPUTS_SEPARATOR = "~"
+    GUID_INPUTS_SEPARATOR = u"~"
     GUID_INPUTS_ESCAPE = r'\{sep}\{sep}'.format(sep=GUID_INPUTS_SEPARATOR)
     _guid = None
 
@@ -286,8 +288,7 @@ class GuidMixin(object):
 
         inputs = [input_value.replace(self.GUID_INPUTS_SEPARATOR, self.GUID_INPUTS_ESCAPE)
                   for input_value in inputs_to_guid]
-        guid.update(self.GUID_INPUTS_SEPARATOR.join(inputs))
-
+        guid.update(five.b(self.GUID_INPUTS_SEPARATOR.join(inputs)))
         return guid.hexdigest()
 
     def _get_guid_inputs(self):

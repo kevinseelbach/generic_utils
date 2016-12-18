@@ -65,7 +65,7 @@ class Pipeline(object):
                 try:
                     should_continue, intermediate_result = self._execute_transition_filters(func, intermediate_result)
                 except PipelineErrorExit as error_exit:
-                    LOG.debug("Exiting pipeline early due to transition function raising %s", error_exit)
+                    LOG.debug("Exiting pipeline early due to transition function raising Error=%r", error_exit)
                     raise
 
                 if should_continue is not True:
