@@ -56,7 +56,7 @@ class TestVersion(TestCase):
         self.assertVersionsEqual(v.get_future_version(release=1),
                                  Version(major=0, year=12, week=52, patch=0))
         self.assertVersionsEqual(v.get_future_version(release=2),
-                                 Version(major=0, year=13, week=01, patch=0))
+                                 Version(major=0, year=13, week=0o1, patch=0))
 
     def test_future_version_on_53_week_rollover(self):
         """Validates that on a year where the final release_day_of_week falls on the 53rd week that when we increment
@@ -67,7 +67,7 @@ class TestVersion(TestCase):
         self.assertVersionsEqual(v.get_future_version(release=1),
                                  Version(major=0, year=15, week=53, patch=0))
         self.assertVersionsEqual(v.get_future_version(release=2),
-                                 Version(major=0, year=16, week=01, patch=0))
+                                 Version(major=0, year=16, week=0o1, patch=0))
 
     def test_version_compare(self):
         """Validates that all comparisons for a Version work as expected.  This includes a Version to Version comparison

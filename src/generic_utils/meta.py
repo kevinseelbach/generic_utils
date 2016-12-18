@@ -6,7 +6,7 @@ class MetaClass(type):
         try:
             frame = inspect.currentframe()
             frame = frame.f_back
-            if frame.f_locals.has_key(classname):
+            if classname in frame.f_locals:
                 old_class = frame.f_locals.get(classname)
                 for name, func in classdict.items():
                     if inspect.isfunction(func):

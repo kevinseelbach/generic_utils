@@ -6,6 +6,7 @@ from mock import patch
 import mock
 
 from generic_utils.test.mock.tools import spy_object, patch_urlopen_with_file
+from functools import reduce
 
 
 class MyTestObject(object):

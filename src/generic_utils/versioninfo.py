@@ -1,8 +1,10 @@
+from __future__ import absolute_import
 import calendar
 import datetime
 import os
 import re
 import hashlib
+from functools import reduce
 
 
 VERSION_PATTERN_PREFIX = "__version_"
@@ -40,7 +42,7 @@ BUILD_VAL_NAMES = ["build", "build_v2"]
 try:
     # Since this module is used within the mercurial extensions, we don't have access to all of python-utils, so we
     # need to guard importing of the logger
-    from loggingtools import getLogger
+    from .loggingtools import getLogger
     log = getLogger()
 except ImportError:
     log = None

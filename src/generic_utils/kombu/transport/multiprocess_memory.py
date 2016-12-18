@@ -35,6 +35,7 @@ NOTE:  This is not thread safe such that you cannot run multiple tests in parall
     of this do not protect itself and leverages global state.  This is thread safe internally in its management of its
     internal responsibilities and as a Kombu service.
 """
+from __future__ import print_function
 import os
 import sys
 import signal
@@ -229,10 +230,10 @@ class Channel(MemoryChannel):  # pylint: disable=abstract-method
 
     def _has_queue(self, queue, **kwargs):
         _debug("has_queue %s" % queue)
-        return self.queues.has_key(queue)
+        return queue in self.queues
 
     def _new_queue(self, queue, **kwargs):
-        if not self.queues.has_key(queue):
+        if queue not in self.queues:
             _debug("Created new channel %s" % queue)
             self._create_new_queue(queue)
         else:
@@ -345,4 +346,4 @@ def _debug(msg):
     """
     if _ENABLE_HACKY_DEBUG:
         # Print because logging doesn't work with multi-processes to a file
-        print "(%s) - %s" % (str(os.getpid()), msg)
+        print("(%s) - %s" % (str(os.getpid()), msg))
