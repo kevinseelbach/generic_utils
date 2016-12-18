@@ -1,0 +1,13 @@
+-e ".[html,cassandra,celery_test,test_utils]"
+coverage>=4.2,<5.0
+mock>=2.0.0
+nose==1.3.7
+pylint>=1.6.4,<2.0
+pylint-common>=0.2.2,<1.0
+pylint-django>=0.7.2,<1.0
+pylint-plugin-utils>=0.2.4,<1.0
+bumpversion==0.5.3
+watchdog==0.8.3
+Sphinx==1.4.8
+statsd==3.2.1
+

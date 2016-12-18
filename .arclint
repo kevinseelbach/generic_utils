@@ -1,0 +1,23 @@
+{
+  "linters": {
+    "pylint-source": {
+      "type": "pylint",
+      "pylint.config": "config/pylint-src.cfg",
+      "include": [
+        "(^src/.*\\.py$)"
+      ],
+      "exclude": [
+        "(^env/)",
+        "(^.*/migrations/.*$)",
+        "(^.*/south_migrations/.*$)"
+      ],
+      "bin": ".env/bin/pylint"
+    },
+    "pylint-tests": {
+      "type": "pylint",
+      "include": ["(^tests/.*\\.py$)"],
+      "pylint.config": "config/pylint-tests.cfg",
+      "bin": ".env/bin/pylint"
+    }
+  }
+}
