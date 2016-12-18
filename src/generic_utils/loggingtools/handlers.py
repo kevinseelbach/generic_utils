@@ -2,6 +2,7 @@
 """
 from __future__ import absolute_import
 
+from builtins import object
 from logging.handlers import RotatingFileHandler
 import codecs
 from logging import FileHandler, Formatter

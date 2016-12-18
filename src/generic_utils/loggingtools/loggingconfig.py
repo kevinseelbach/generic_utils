@@ -1,6 +1,7 @@
 """Module which provides tools for dealing with logging configuration, primarily with providing log configuration at
 runtime from any provider backend.
 """
+from builtins import object
 from collections import namedtuple
 import logging
 from . import getLogger
@@ -274,7 +275,7 @@ class LogLevelProviderCollection(LogLevelProvider):
             self._refresh_last_update_datetime(provider)
             if not prov_overrides:
                 continue
-            for logger_name, override in prov_overrides.iteritems():
+            for logger_name, override in prov_overrides.items():
                 if logger_name not in overrides or override > overrides[logger_name]:
                     overrides[logger_name] = override
 
@@ -301,7 +302,7 @@ class InMemoryLogLevelProvider(LogLevelProvider):
     def remove_all_overrides(self):
         """Removes all applied overrides
         """
-        self.remove_overrides(self._overrides.keys())
+        self.remove_overrides(list(self._overrides.keys()))
         LOG.debug("All overrides removed")
 
     def remove_overrides(self, *logger_names):
@@ -350,7 +351,7 @@ class InMemoryLogLevelProvider(LogLevelProvider):
             self._modification_lock.acquire()
             current_overrides = self.get_overrides()
             new_overrides = {}
-            for logger_name, level_override in overrides_dict.iteritems():
+            for logger_name, level_override in overrides_dict.items():
                 if isinstance(level_override, int):
                     # Convert a raw level to a LevelOverride as a convenience
                     level_override = LevelOverride(level_override)
@@ -359,7 +360,7 @@ class InMemoryLogLevelProvider(LogLevelProvider):
                     continue  # Nothing new
                 new_overrides[logger_name] = level_override
 
-            for logger_name, level_override in new_overrides.iteritems():
+            for logger_name, level_override in new_overrides.items():
                 if level_override.expiration_date is NOTSET:
                     level_override.expiration_date = expiration_date
 

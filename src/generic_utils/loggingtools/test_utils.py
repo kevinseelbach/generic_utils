@@ -1,5 +1,7 @@
 """Various utilities for dealing with logging within tests
 """
+from builtins import str
+from builtins import object
 import logging
 import re
 from logging.handlers import MemoryHandler

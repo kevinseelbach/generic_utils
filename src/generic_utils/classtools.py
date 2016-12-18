@@ -1,4 +1,5 @@
 """Functions to assist programming various things with classes."""
+from builtins import object
 import inspect
 from importlib import import_module
 

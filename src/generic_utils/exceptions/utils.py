@@ -1,4 +1,5 @@
 """Utilities for working with Exceptions"""
+from builtins import next
 from generic_utils.classtools import get_class_from_fqn, cached_property
 from generic_utils.config import config
 from generic_utils.contextlib_ex import ExplicitContextDecorator

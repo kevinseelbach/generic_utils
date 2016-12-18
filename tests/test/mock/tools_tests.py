@@ -1,12 +1,20 @@
 """Tests for generic_utils.test.mock.tools"""
-import urllib2
 from unittest import TestCase
 
-from mock import patch
-import mock
+try:
+    import urllib.request
+    urllib2 = urllib.request
+except ImportError:     # python 2
+    import urllib2
 
+import mock
+from mock import patch
+from generic_utils import loggingtools
 from generic_utils.test.mock.tools import spy_object, patch_urlopen_with_file
 from functools import reduce
+
+
+LOG = loggingtools.getLogger()
 
 
 class MyTestObject(object):
@@ -100,6 +108,7 @@ class PatchUrlopenWithFileTestCase(TestCase):
             my_mock.return_value.read.return_value = self.test_file_content
 
             with patch_urlopen_with_file("dummy_filename"):
+                LOG.debug("urlopen={0}.{1}".format(urllib2.urlopen.__module__, urllib2.urlopen.func_name))
                 response = urllib2.urlopen("http://example.com")
                 self.assertEqual(response.read(), self.test_file_content)
                 my_mock.assert_called_with("dummy_filename", "r")

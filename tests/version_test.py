@@ -1,3 +1,6 @@
+from builtins import str
+from builtins import zip
+from builtins import range
 import inspect
 import os
 import pickle
@@ -89,7 +92,7 @@ class TestVersion(TestCase):
             log.debug("Testing version component '%s'", tested_comp)
             fuzzy_comps = VERSION_COMPONENTS[i+1:]
             fixed_kwargs = {}
-            fixed_kwargs.update(dict(zip(VERSION_COMPONENTS, [FIXED_VAL] * len(VERSION_COMPONENTS))))
+            fixed_kwargs.update(dict(list(zip(VERSION_COMPONENTS, [FIXED_VAL] * len(VERSION_COMPONENTS)))))
             a = Version(**fixed_kwargs)
             b = Version(**fixed_kwargs)
 

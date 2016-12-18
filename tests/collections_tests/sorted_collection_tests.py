@@ -1,3 +1,5 @@
+from builtins import map
+from builtins import range
 import logging
 from unittest import TestCase
 from generic_utils.base_utils import ImmutableMixin, ImmutableDelay

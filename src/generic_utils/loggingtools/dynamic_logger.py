@@ -2,6 +2,7 @@
 a logging level manager which allows for runtime log level changes from any log level provider(whether file based,
 database based, etc)
 """
+from builtins import str
 from logging import Logger, NOTSET as logging_NOTSET, setLoggerClass, getLoggerClass
 from generic_utils.classtools import get_classfqn
 from generic_utils.typetools import as_iterable
@@ -175,7 +176,7 @@ class DynamicLogLevelLogger(Logger):
         """
         assert issubclass(logger_cls, Logger)
 
-        for logger in Logger.manager.loggerDict.values():
+        for logger in list(Logger.manager.loggerDict.values()):
             if not isinstance(logger, Logger):
                 continue
             # Can you believe this actually works?  Python, what a country!!!

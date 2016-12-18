@@ -1,5 +1,6 @@
 """Various tools for working with the Cassandra schema
 """
+from past.builtins import basestring
 from importlib import import_module
 import inspect
 from cassandra import AlreadyExists
@@ -89,7 +90,7 @@ def discover_models_from_packages(packages):
             module = import_module(module_name)
             log.debug("Cassandra models module defined for package %s", pkg)
             new_models = discover_models_from_module(module)
-            for keyspace, ks_models in new_models.items():
+            for keyspace, ks_models in list(new_models.items()):
                 keyspace_models = models.setdefault(keyspace, [])
                 keyspace_models.extend(ks_models)
         except ImportError:

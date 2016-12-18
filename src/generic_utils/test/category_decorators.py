@@ -19,6 +19,7 @@ attribute.  In order to run all tests but exclude the "slow" tests you could the
     > bin/test -a category='not slow' -a '!category'
 
 """
+from builtins import object
 from generic_utils.decorator_tools import decorator
 from generic_utils.test.nose_utils import get_attrib_decorated_func, specialize_attr_decorator
 

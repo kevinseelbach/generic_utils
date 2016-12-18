@@ -109,7 +109,7 @@ class SysLogHandler(python_SysLogHandler):
         :return:
         :rtype: unicode
         """
-        if isinstance(message, unicode):
+        if isinstance(message, str):
             return message
         elif isinstance(message, str):
             return message.decode('utf-8', 'replace')

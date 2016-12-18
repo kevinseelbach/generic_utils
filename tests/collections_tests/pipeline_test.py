@@ -84,7 +84,7 @@ class PipelineTestCase(TestCase):
             c: None,
             d: InvalidStageException
         }
-        for stage_func, expectation in EXPECTATION_MAP.iteritems():
+        for stage_func, expectation in EXPECTATION_MAP.items():
             if expectation is InvalidStageException:
                 with self.assertRaises(expectation):
                     self.pipeline._get_next_stage(stage_func)

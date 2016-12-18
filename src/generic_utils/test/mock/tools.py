@@ -1,11 +1,27 @@
 """Tools for simplifying mocking of objects
 """
+import six
 from mock import patch
-
 from generic_utils.contextlib_ex import ExplicitContextManagerMixin, ContextDecorator, ExplicitContextDecorator
 from generic_utils import loggingtools
 
-log = loggingtools.getLogger()
+LOG = loggingtools.getLogger()
+
+# Python 2 and 3: alternative 4
+try:
+    from urllib import request
+    urlopen = request.urlopen
+except ImportError:
+    import urllib2
+    urlopen = urllib2.urlopen
+
+
+_URLOPEN_PATCH_TARGET = "{0}.urlopen".format(urlopen.__module__)
+#
+# if six.PY2:
+#     _URLOPEN_PATCH_TARGET = 'urllib2.urlopen'
+# else:
+#     _URLOPEN_PATCH_TARGET = 'urllib.request.urlopen'
 
 
 class SpyObjectResult(object):
@@ -64,7 +80,7 @@ class SpyObject(ExplicitContextManagerMixin, ContextDecorator):
         self._patched_object = None
         for illegal_kwarg in self.illegal_kwargs:
             if illegal_kwarg in self.mock_kwargs:
-                log.warn("Illegal kwarg %s provided as input to spy_object and it will be ignored", illegal_kwarg)
+                LOG.warn("Illegal kwarg %s provided as input to spy_object and it will be ignored", illegal_kwarg)
                 del self.mock_kwargs[illegal_kwarg]
 
     def __enter__(self):
@@ -115,7 +131,7 @@ class SpyObject(ExplicitContextManagerMixin, ContextDecorator):
         failure for a debug log we just want to miss out on the log message.
         """
         try:
-            log.debug(msg, *args)
+            LOG.debug(msg, *args)
         except (TypeError, AttributeError):
             # Some objects dont know how to str themselves, so no point in puking on a debug message
             pass
@@ -150,6 +166,7 @@ class PatchFilelikeResponse(ExplicitContextDecorator):
 
     def __enter__(self):
         """Start patch."""
+        LOG.debug("Patching urllopen with target patch=%r", self._patch_module)
         if isinstance(self._patch_module, str):
             self.patch_method = patch(self._patch_module)
         else:
@@ -171,12 +188,12 @@ patch_filelike_response = PatchFilelikeResponse  # pylint: disable=invalid-name
 
 
 class PatchUrlopenWithFile(PatchFilelikeResponse):
-    """Patch the response to urllib2.urlopen with contents of a file."""
+    """Patch the response to urlopen with contents of a file."""
 
     def __init__(self, filename):
         """
         :param str filename: file to open and inject to urlopen response.
         """
-        super(PatchUrlopenWithFile, self).__init__(filename, 'urllib2.urlopen', None)
+        super(PatchUrlopenWithFile, self).__init__(filename, _URLOPEN_PATCH_TARGET, None)
 
 patch_urlopen_with_file = PatchUrlopenWithFile  # pylint: disable=invalid-name

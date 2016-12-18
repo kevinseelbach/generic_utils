@@ -36,6 +36,7 @@ NOTE:  This is not thread safe such that you cannot run multiple tests in parall
     internal responsibilities and as a Kombu service.
 """
 from __future__ import print_function
+from builtins import str
 import os
 import sys
 import signal

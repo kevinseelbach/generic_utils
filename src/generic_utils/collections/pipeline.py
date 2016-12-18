@@ -1,4 +1,6 @@
 """Generic pipeline."""
+from builtins import range
+from builtins import object
 from generic_utils.collections.exceptions import InvalidStageException, PipelineException, PipelineSuccessExit, \
     PipelineErrorExit
 from generic_utils import loggingtools
@@ -52,7 +54,7 @@ class Pipeline(object):
         """
         intermediate_result = None
         num_of_stage_funcs = len(self)
-        for idx in xrange(num_of_stage_funcs):
+        for idx in range(num_of_stage_funcs):
             func = self._stage_functions[idx]
             if idx == 0:
                 intermediate_result = func(*args, **kwargs)

@@ -1,4 +1,5 @@
 """Celery test case mixin."""
+from builtins import object
 from multiprocessing import Process, Manager
 from celery.worker import state
 from celery.beat import EmbeddedService
@@ -9,6 +10,7 @@ from nose.tools import nottest
 from generic_utils import loggingtools
 
 from generic_utils.test import TestCaseMixinMetaClass
+from future.utils import with_metaclass
 
 
 LOG = loggingtools.getLogger()
@@ -87,13 +89,12 @@ class CeleryWorkerProcess(Process):
 
 
 
-class CeleryTestCaseMixin(object):
+class CeleryTestCaseMixin(with_metaclass(TestCaseMixinMetaClass, object)):
     """
     Base Celery test class. It handles setup and teardown Celery test configurations.
 
     This is mostly taken from celerytest.testcase.CeleryTestCaseMixin with some bugs fixed
     """
-    __metaclass__ = TestCaseMixinMetaClass
 
     celery_config = CELERY_TEST_CONFIG_MEMORY
     celery_app = None
@@ -236,7 +237,7 @@ class CeleryTestCaseMixin(object):
         config = type("TempConfig", (object,), dict(cls.celery_config.__dict__))
         worker_conf = cls.WORKER_TYPE_CONF_MAP[cls.worker_type]
         if "config" in worker_conf:
-            for key, value in worker_conf["config"].items():
+            for key, value in list(worker_conf["config"].items()):
                 setattr(config, key, value)
 
         if cls.worker_type == PROCESS_WORKER:

@@ -11,6 +11,7 @@ from generic_utils.cassandra_utils.cqlengine_tools.connection import setup_conne
     is_cassandra_available as prod_is_cassandra_available
 from generic_utils.cassandra_utils.cqlengine_tools.schema_tools import truncate_table, create_keyspace_from_model
 from generic_utils.test import TestCaseMixinMetaClass, TestCase
+from future.utils import with_metaclass
 
 
 log = loggingtools.getLogger()
@@ -27,14 +28,13 @@ def is_cassandra_available():
     return prod_is_cassandra_available()
 
 
-class CassandraTestCaseMixin(TestCase):
+class CassandraTestCaseMixin(with_metaclass(TestCaseMixinMetaClass, TestCase)):
     """TestCase mixin which provides helper functionality for dealing with Cassandra within a TestCase such as:
 
     1> Auto skipping of the whole TestCase if Cassandra is not available
     2> Auto syncing of models which are defined in the class property `test_models`
     3> Truncation of models defined in `test_models` on tearDown to provide post test cleanup
     """
-    __metaclass__ = TestCaseMixinMetaClass
 
     # Whether or not this Mixin should be enabled.  It is possible that based on the dynamic configuration of the system
     # that the test case does not actually use cassandra, in which case the mixin should not perform its duties.

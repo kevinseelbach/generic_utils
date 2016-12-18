@@ -17,9 +17,9 @@ def lower_keys(input_val, recursive=False):
     """
     if isinstance(input_val, dict):
         if recursive:
-            return {key.lower(): lower_keys(value, recursive) for key, value in input_val.iteritems()}
+            return {key.lower(): lower_keys(value, recursive) for key, value in input_val.items()}
         else:
-            return {key.lower(): value for key, value in input_val.iteritems()}
+            return {key.lower(): value for key, value in input_val.items()}
     elif is_iterable(input_val):
         return [lower_keys(v, recursive) for v in input_val]
     else:

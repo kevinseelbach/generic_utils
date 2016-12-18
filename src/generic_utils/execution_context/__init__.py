@@ -1,5 +1,6 @@
 """Classes to define ExecutionContext concepts which contain any special configuration / context data needed at runtime
 """
+from builtins import object
 import copy
 import threading
 
@@ -102,7 +103,7 @@ class BaseExecutionContext(object):
         cls = self.__class__
         result = cls.__new__(cls)
         memo[id(self)] = result
-        for key, value in self.__dict__.iteritems():
+        for key, value in self.__dict__.items():
             setattr(result, key, copy.deepcopy(value, memo))
         LOG.debug("Successful deep copy, returning instance copy.")
         return result

@@ -1,6 +1,7 @@
 """Utilities for dealing with Context Managers and the like
 """
 from __future__ import absolute_import
+from builtins import object
 import functools
 from functools import update_wrapper
 import importlib

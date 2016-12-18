@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import range
 def baseconv(num, alphabet, minimum_characters=0):
     """
     convert base 10 number to custom base w/ alphabet

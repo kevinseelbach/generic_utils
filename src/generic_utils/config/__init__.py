@@ -2,6 +2,9 @@
 Generic configuration interface and module which allows for exposing environment/application configuration through a
 generic uniformly available interface
 """
+from builtins import str
+from past.builtins import basestring
+from builtins import object
 import inspect
 
 import os

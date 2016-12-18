@@ -1,5 +1,6 @@
 """Provides a sorted collection that is much easier to work with than using bisect() directly"""
 # pylint: disable=missing-docstring
+from builtins import object
 from bisect import bisect_left, bisect_right
 
 

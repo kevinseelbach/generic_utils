@@ -2,23 +2,21 @@
 """
 import hashlib
 import os
+import unittest
+
+import six
+
 from generic_utils.hashlib_tools import get_chunked_hash
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
 
-from unittest import TestCase
-
-
-class HashlibToolsTestCase(TestCase):
+class HashlibToolsTestCase(unittest.TestCase):
     """TestCase for HashlibTools"""
 
     def test_get_chunked_hash(self):
         """Validate get_chunked_hash works as expected
         """
-        test_output = StringIO()
+        # noinspection PyCallingNonCallable
+        test_output = six.StringIO()
         # An odd number of bytes to validate that the result hashes the remainder of len(data) /chunk_size
         test_data = os.urandom(150000)
         test_output.write(test_data)

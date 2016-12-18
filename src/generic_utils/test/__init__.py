@@ -1,5 +1,6 @@
 """Utilities for writing tests
 """
+from builtins import str
 import threading
 
 import unittest
@@ -7,6 +8,7 @@ import new
 from unittest.case import expectedFailure
 import types
 from generic_utils import loggingtools
+from future.utils import with_metaclass
 
 try:
     from ddt import ddt, mk_test_name, add_test, data as ddt_data, UNPACK_ATTR, DATA_ATTR, FILE_ATTR, process_file_data
@@ -236,12 +238,11 @@ class TestCaseMixinMetaClass(type):
                 add_test(cls, test_name, test_func)
 
 
-class TestCase(unittest.TestCase):
+class TestCase(with_metaclass(TestCaseMixinMetaClass, unittest.TestCase)):
     """
     Base TestCase class which applies behavior provided by TestCaseMixinMetaClass.
         See docstring of TestCaseMixinMetaClass for more details.
     """
-    __metaclass__ = TestCaseMixinMetaClass
 
     def _custom_setup(self):  # pylint: disable=invalid-name
         """Setup method that should be overridden by utility TestCase subclasses instead of the core test setUp method.

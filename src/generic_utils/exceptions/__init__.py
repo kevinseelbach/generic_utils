@@ -50,7 +50,7 @@ class GenUtilsException(Exception):
     def _set_kwargs(self, kwargs):
         """Sets the values of the kwargs of the init of the exception as attributes on the exception instance
         """
-        for key, val in kwargs.iteritems():
+        for key, val in kwargs.items():
             try:
                 if key.startswith("_"):
                     raise IllegalArgumentException("Illegal argument {argument_name}.  Cannot provide private "

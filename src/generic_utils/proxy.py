@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import object
 class Proxy(object):
     """
     Proxies an object and allows for injecting behavior into the representation of the object without modifying the
@@ -47,7 +49,7 @@ class Proxy(object):
         name = object.__getattribute__(self, "_get_attr_name")(name)
         setattr(object.__getattribute__(self, "_obj"), name, value)
     
-    def __nonzero__(self):
+    def __bool__(self):
         return bool(object.__getattribute__(self, "_obj"))
 
     def __str__(self):

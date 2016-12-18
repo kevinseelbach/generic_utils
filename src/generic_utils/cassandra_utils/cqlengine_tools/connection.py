@@ -1,5 +1,6 @@
 """Module which assists in establishing and configuring Cassandra connections
 """
+from builtins import object
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import NoHostAvailable  # pylint: disable=no-name-in-module
 from cassandra.cqlengine import connection as cqlengine_connection

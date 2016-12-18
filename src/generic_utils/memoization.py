@@ -1,5 +1,7 @@
 
-class Memoize:
+from builtins import str
+from builtins import object
+class Memoize(object):
     """
     Function decorator which will memoize the results of a function call based on the parameters passed to the function
     """

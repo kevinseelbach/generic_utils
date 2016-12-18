@@ -1,3 +1,5 @@
+from builtins import map
+from past.builtins import basestring
 import sys
 from textwrap import dedent
 from keyword import iskeyword

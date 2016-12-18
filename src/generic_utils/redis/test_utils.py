@@ -1,3 +1,4 @@
+from builtins import object
 import new
 from generic_utils import loggingtools
 from generic_utils.test import TestCaseMixinMetaClass
@@ -7,6 +8,7 @@ from unittest import SkipTest
 from redis import ConnectionError
 
 from .utils import get_client_url
+from future.utils import with_metaclass
 
 
 log = loggingtools.getLogger(__name__)
@@ -17,10 +19,7 @@ REDIS_TEST_INSTANCE_ENV_VAR = "REDIS_TEST_INSTANCES"
 _declared_test_instances = None
 
 
-class RedisTestCaseMixin(object):
-    __metaclass__ = TestCaseMixinMetaClass
-    # Either a redis client instance or a function which takes no arguments which returns a redis client to use for the
-    # test case.  This must be provided otherwise the test will be skipped
+class RedisTestCaseMixin(with_metaclass(TestCaseMixinMetaClass, object)):
     redis_client = None
 
     # Whether or not this Mixin should be enabled.  It is possible that based on the dynamic configuration of the system

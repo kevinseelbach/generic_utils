@@ -1,5 +1,7 @@
 """Module for common web-scraping helper functions / class
 """
+from past.builtins import basestring
+from builtins import object
 from bs4 import UnicodeDammit
 from lxml import html
 from lxml.html.clean import Cleaner

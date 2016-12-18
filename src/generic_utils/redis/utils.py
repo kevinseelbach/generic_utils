@@ -1,6 +1,8 @@
 """
 Utilities for redis
 """
+from builtins import str
+from builtins import object
 from generic_utils.config import get_config_value
 from redis.client import StrictRedis
 

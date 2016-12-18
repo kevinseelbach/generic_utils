@@ -1,3 +1,4 @@
+from builtins import object
 from unittest import TestCase
 from generic_utils import loggingtools
 from generic_utils.datetimetools import utcnow

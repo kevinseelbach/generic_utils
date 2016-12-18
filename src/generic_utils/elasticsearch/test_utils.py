@@ -1,6 +1,7 @@
 """
 ElasticsearchTestCaseMixin module.
 """
+from builtins import object
 from os import environ
 from unittest import SkipTest
 from elasticsearch import Elasticsearch
@@ -8,6 +9,7 @@ from elasticsearch import Elasticsearch
 from generic_utils import loggingtools
 from generic_utils.test import TestCaseMixinMetaClass
 from generic_utils.test.category_decorators import integration_test
+from future.utils import with_metaclass
 
 
 LOG = loggingtools.getLogger()
@@ -29,11 +31,10 @@ def get_es_instance(**kwargs):
 
 
 @integration_test
-class ElasticsearchTestCaseMixin(object):
+class ElasticsearchTestCaseMixin(with_metaclass(TestCaseMixinMetaClass, object)):
     """
     Base Elasticsearch test class. It handles setup and teardown and set up Elasticsearch connection.
     """
-    __metaclass__ = TestCaseMixinMetaClass
 
     index_name = "for-testing-only"
 

@@ -1,6 +1,7 @@
 """
 Module which defines custom Cassandra data types or extensions to core Cassandra data types.
 """
+from past.builtins import basestring
 import pickle
 
 from cassandra.cqltypes import DateType  # pylint: disable=no-name-in-module
