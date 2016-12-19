@@ -1,5 +1,4 @@
 # future/compat
-from builtins import object
 from future.utils import with_metaclass
 
 # stdlib

@@ -3,7 +3,6 @@ Generic configuration interface and module which allows for exposing environment
 generic uniformly available interface
 """
 # future/compat
-from builtins import object
 from builtins import str
 from past.builtins import basestring
 

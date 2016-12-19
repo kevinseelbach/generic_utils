@@ -1,7 +1,4 @@
 """Provides a sorted collection that is much easier to work with than using bisect() directly"""
-# future/compat
-from builtins import object
-
 # stdlib
 from bisect import bisect_left
 from bisect import bisect_right

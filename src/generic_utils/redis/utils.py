@@ -2,7 +2,6 @@
 Utilities for redis
 """
 # future/compat
-from builtins import object
 from builtins import str
 
 from redis.client import StrictRedis

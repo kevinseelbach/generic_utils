@@ -1,7 +1,6 @@
 """Various utilities for dealing with logging within tests
 """
 # future/compat
-from builtins import object
 from builtins import str
 
 # stdlib

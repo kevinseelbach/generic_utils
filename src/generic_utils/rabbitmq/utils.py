@@ -1,9 +1,6 @@
 """
 Utilities for rabbitmq
 """
-# future/compat
-from builtins import object
-
 # stdlib
 from generic_utils.config import get_config_value
 from generic_utils.loggingtools import getLogger

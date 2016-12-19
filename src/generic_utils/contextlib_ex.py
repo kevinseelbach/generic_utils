@@ -2,9 +2,6 @@
 """
 from __future__ import absolute_import
 
-# future/compat
-from builtins import object
-
 # stdlib
 import functools
 import importlib

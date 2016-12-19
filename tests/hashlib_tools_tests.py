@@ -8,7 +8,6 @@ import hashlib
 import os
 import unittest
 
-from generic_utils import five
 from generic_utils.hashlib_tools import get_chunked_hash
 
 

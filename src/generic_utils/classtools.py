@@ -1,7 +1,4 @@
 """Functions to assist programming various things with classes."""
-# future/compat
-from builtins import object
-
 # stdlib
 import inspect
 from importlib import import_module

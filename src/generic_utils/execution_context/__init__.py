@@ -1,8 +1,5 @@
 """Classes to define ExecutionContext concepts which contain any special configuration / context data needed at runtime
 """
-# future/compat
-from builtins import object
-
 # stdlib
 import copy
 

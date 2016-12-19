@@ -1,6 +1,5 @@
 """Celery test case mixin."""
 # future/compat
-from builtins import object
 from future.utils import with_metaclass
 
 # stdlib
@@ -24,6 +23,7 @@ LOG = loggingtools.getLogger()
 # Constants which indicate what type of Celery worker to use for running a test.  The default is a THREAD_WORKER
 PROCESS_WORKER = "process_worker"
 THREAD_WORKER = "thread_worker"
+
 
 class CeleryWorkerProcess(Process):
     """A process based celery worker which just wraps the CeleryWorkerThread in a Process.
@@ -92,7 +92,6 @@ class CeleryWorkerProcess(Process):
         """An Event which is set when the worker is idle
         """
         return self._kwargs["idle_event"]
-
 
 
 class CeleryTestCaseMixin(with_metaclass(TestCaseMixinMetaClass, object)):

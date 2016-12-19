@@ -1,7 +1,6 @@
 from __future__ import division
 
 # future/compat
-from builtins import object
 from builtins import range
 from past.utils import old_div
 

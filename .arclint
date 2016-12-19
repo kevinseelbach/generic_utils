@@ -11,13 +11,13 @@
         "(^.*/migrations/.*$)",
         "(^.*/south_migrations/.*$)"
       ],
-      "bin": ".env/bin/pylint"
+      "bin": "env/bin/pylint"
     },
     "pylint-tests": {
       "type": "pylint",
       "include": ["(^tests/.*\\.py$)"],
       "pylint.config": "config/pylint-tests.cfg",
-      "bin": ".env/bin/pylint"
+      "bin": "env/bin/pylint"
     }
   }
 }

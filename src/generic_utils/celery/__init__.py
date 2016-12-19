@@ -1,9 +1,6 @@
 """
 Python Utils for Celery Job Framework
 """
-# future/compat
-from builtins import object
-
 from generic_utils.config import get_config_value
 from generic_utils.loggingtools import getLogger
 from generic_utils.rabbitmq.utils import get_rabbitmq_config_values

@@ -1,6 +1,3 @@
-# future/compat
-from builtins import object
-
 
 class FactoryMemoizer(object):
     """

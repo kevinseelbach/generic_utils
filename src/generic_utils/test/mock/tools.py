@@ -1,8 +1,5 @@
 """Tools for simplifying mocking of objects
 """
-# future/compat
-import six
-
 # stdlib
 import io
 
@@ -15,7 +12,7 @@ from generic_utils.contextlib_ex import ExplicitContextManagerMixin
 
 LOG = loggingtools.getLogger()
 
-# Python 2 and 3: alternative 4
+# future/compat
 try:
     from urllib import request
     urlopen = request.urlopen
@@ -25,11 +22,6 @@ except ImportError:
 
 
 _URLOPEN_PATCH_TARGET = "{0}.urlopen".format(urlopen.__module__)
-#
-# if six.PY2:
-#     _URLOPEN_PATCH_TARGET = 'urllib2.urlopen'
-# else:
-#     _URLOPEN_PATCH_TARGET = 'urllib.request.urlopen'
 
 
 class SpyObjectResult(object):
