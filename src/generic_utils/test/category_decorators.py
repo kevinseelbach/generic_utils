@@ -19,7 +19,7 @@ attribute.  In order to run all tests but exclude the "slow" tests you could the
     > bin/test -a category='not slow' -a '!category'
 
 """
-# stdlib
+# future/compat
 from builtins import object
 
 from generic_utils.decorator_tools import decorator

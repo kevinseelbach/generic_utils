@@ -1,7 +1,9 @@
+# future/compat
+from builtins import object
+
 # stdlib
 import logging
 import types
-from builtins import object
 from unittest import TestCase
 
 from mock import patch

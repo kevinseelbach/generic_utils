@@ -1,5 +1,7 @@
-# stdlib
+# future/compat
 from builtins import object
+
+# stdlib
 from unittest import TestCase
 
 from generic_utils import loggingtools

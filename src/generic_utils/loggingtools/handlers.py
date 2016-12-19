@@ -1,10 +1,11 @@
 """Various core python logging handlers
 """
 from __future__ import absolute_import
+# future/compat
+from builtins import object
 
 # stdlib
 import codecs
-from builtins import object
 from logging import StreamHandler as py_StreamHandler
 from logging import FileHandler
 from logging import Formatter

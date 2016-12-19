@@ -1,8 +1,7 @@
 """
 Python Utils for Celery Job Framework
 """
-
-# stdlib
+# future/compat
 from builtins import object
 
 from generic_utils.config import get_config_value

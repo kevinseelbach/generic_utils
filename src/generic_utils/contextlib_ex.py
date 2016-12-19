@@ -2,10 +2,12 @@
 """
 from __future__ import absolute_import
 
+# future/compat
+from builtins import object
+
 # stdlib
 import functools
 import importlib
-from builtins import object
 from functools import update_wrapper
 
 # Import types using import_module because the relative module "types" is shadowing the global types

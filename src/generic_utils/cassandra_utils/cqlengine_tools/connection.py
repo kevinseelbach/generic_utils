@@ -1,6 +1,6 @@
 """Module which assists in establishing and configuring Cassandra connections
 """
-# stdlib
+# future/compat
 from builtins import object
 
 from cassandra.auth import PlainTextAuthProvider

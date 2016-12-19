@@ -1,15 +1,12 @@
 from __future__ import division
 
 # future/compat
+from builtins import object
+from builtins import range
 from past.utils import old_div
 
 # stdlib
 import logging
-import sys
-import types
-from builtins import object
-from builtins import range
-from inspect import getmembers
 from unittest import TestCase
 
 from generic_utils.itertools_ex import IteratorProxy

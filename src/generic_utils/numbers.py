@@ -1,4 +1,4 @@
-# stdlib
+# future/compat
 from builtins import range
 from builtins import str
 

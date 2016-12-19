@@ -1,16 +1,14 @@
-# stdlib
-import logging
-from bisect import bisect_left
-from bisect import bisect_right
+# future/compat
 from builtins import map
 from builtins import range
+
+# stdlib
 from unittest import TestCase
 
-from generic_utils.base_utils import ImmutableDelay
-from generic_utils.base_utils import ImmutableMixin
 from generic_utils.collections.sorted_collection import SortedCollection
+from generic_utils import loggingtools
 
-log = logging.getLogger(__name__)
+log = loggingtools.getLogger(__name__)
 
 
 class SortedCollectionTestCase(TestCase):

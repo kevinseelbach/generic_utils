@@ -1,10 +1,12 @@
 """Various utilities for dealing with logging within tests
 """
+# future/compat
+from builtins import object
+from builtins import str
+
 # stdlib
 import logging
 import re
-from builtins import object
-from builtins import str
 from logging.handlers import MemoryHandler
 
 from generic_utils.contextlib_ex import ExplicitContextDecorator

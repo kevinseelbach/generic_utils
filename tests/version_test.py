@@ -1,12 +1,14 @@
+# future/compat
+from builtins import range
+from builtins import str
+from builtins import zip
+
 # stdlib
 import hashlib
 import inspect
 import os
 import pickle
 import random
-from builtins import range
-from builtins import str
-from builtins import zip
 from unittest import TestCase
 
 from generic_utils import loggingtools

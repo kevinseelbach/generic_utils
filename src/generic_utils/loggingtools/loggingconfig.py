@@ -1,10 +1,12 @@
 """Module which provides tools for dealing with logging configuration, primarily with providing log configuration at
 runtime from any provider backend.
 """
+# future/compat
+from builtins import object
+
 # stdlib
 import logging
 import threading
-from builtins import object
 from collections import namedtuple
 
 from generic_utils import NOTSET

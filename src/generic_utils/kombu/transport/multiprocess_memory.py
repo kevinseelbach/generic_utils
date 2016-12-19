@@ -37,12 +37,15 @@ NOTE:  This is not thread safe such that you cannot run multiple tests in parall
 """
 from __future__ import print_function
 
+# future/compat
+from builtins import str
+
 # stdlib
 import multiprocessing
 import os
 import signal
 import sys
-from builtins import str
+
 from multiprocessing import Process
 from multiprocessing.managers import DictProxy
 from multiprocessing.managers import ListProxy

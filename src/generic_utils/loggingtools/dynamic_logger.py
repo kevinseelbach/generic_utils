@@ -2,8 +2,10 @@
 a logging level manager which allows for runtime log level changes from any log level provider(whether file based,
 database based, etc)
 """
-# stdlib
+# future/compat
 from builtins import str
+
+# stdlib
 from logging import NOTSET as logging_NOTSET
 from logging import Logger
 from logging import getLoggerClass

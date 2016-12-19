@@ -1,7 +1,7 @@
 """
 Utilities for redis
 """
-# stdlib
+# future/compat
 from builtins import object
 from builtins import str
 

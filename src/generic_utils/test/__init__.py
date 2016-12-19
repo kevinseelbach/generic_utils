@@ -2,14 +2,13 @@
 """
 # future/compat
 import six
+from builtins import str
 from future.utils import with_metaclass
 
 # stdlib
 import threading
 import types
 import unittest
-from builtins import str
-from unittest.case import expectedFailure
 
 from nose.plugins import attrib
 from nose.tools import nottest

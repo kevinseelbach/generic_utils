@@ -2,12 +2,12 @@ from __future__ import absolute_import
 from __future__ import division
 
 # future/compat
+from builtins import map
+from builtins import range
 from past.utils import old_div
 
 # stdlib
 import collections
-from builtins import map
-from builtins import range
 
 
 def split_by_size(s, size, return_remainder=False):

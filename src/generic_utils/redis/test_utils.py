@@ -1,11 +1,9 @@
 # future/compat
+from builtins import object
 from future.utils import with_metaclass
 
 # stdlib
-import new
 import os
-from builtins import object
-from functools import update_wrapper
 from unittest import SkipTest
 
 from redis import ConnectionError

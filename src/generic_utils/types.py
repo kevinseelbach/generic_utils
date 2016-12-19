@@ -1,9 +1,9 @@
 # future/compat
 from past.builtins import basestring
+from builtins import map
 
 # stdlib
 import sys
-from builtins import map
 from keyword import iskeyword
 from textwrap import dedent
 

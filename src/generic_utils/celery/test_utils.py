@@ -1,9 +1,9 @@
 """Celery test case mixin."""
 # future/compat
+from builtins import object
 from future.utils import with_metaclass
 
 # stdlib
-from builtins import object
 from multiprocessing import Manager
 from multiprocessing import Process
 
