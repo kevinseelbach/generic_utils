@@ -1,6 +1,6 @@
 from pylint.checkers.base import DocStringChecker
-from pylint_plugin_utils import suppress_message
 from pylint_django.utils import node_is_subclass
+from pylint_plugin_utils import suppress_message
 
 
 def is_class(class_name):

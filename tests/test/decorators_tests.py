@@ -1,5 +1,11 @@
 from nose.plugins.attrib import get_method_attr
-from generic_utils.test import jira, JIRA_ATTR_NAME, test_generator, TestCase, data, bad_data
+
+from generic_utils.test import JIRA_ATTR_NAME
+from generic_utils.test import TestCase
+from generic_utils.test import bad_data
+from generic_utils.test import data
+from generic_utils.test import jira
+from generic_utils.test import test_generator
 
 
 class AttrTestCase(TestCase):

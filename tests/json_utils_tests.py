@@ -1,5 +1,7 @@
 """Tests for `mapping_utils`"""
+# stdlib
 from unittest import TestCase
+
 from generic_utils import json_utils as ju
 
 UPDATE = 'update'

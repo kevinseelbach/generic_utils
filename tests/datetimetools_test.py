@@ -1,12 +1,19 @@
 """ Tests for datetimetools module.
 """
+# stdlib
 import logging
+from datetime import datetime
+from datetime import timedelta
 from unittest import TestCase
-from datetime import timedelta, datetime
+
 from freezegun import freeze_time
 from pytz import timezone
-from generic_utils.datetimetools import milliseconds_since_epoch, datetime_from_milliseconds, EPOCH
-from generic_utils.datetimetools import get_timezone_offset_string, timezone_supports_dst
+
+from generic_utils.datetimetools import EPOCH
+from generic_utils.datetimetools import datetime_from_milliseconds
+from generic_utils.datetimetools import get_timezone_offset_string
+from generic_utils.datetimetools import milliseconds_since_epoch
+from generic_utils.datetimetools import timezone_supports_dst
 
 LOG = logging.getLogger(__name__)
 

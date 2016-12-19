@@ -1,10 +1,11 @@
-import os
+# stdlib
 import logging
+import os
 from contextlib import contextmanager
 from unittest import TestCase
+
 from generic_utils.config import get_config_value
 from generic_utils.ostools import environment_var
-
 
 log = logging.getLogger(__name__)
 

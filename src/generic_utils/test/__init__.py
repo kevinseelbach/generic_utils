@@ -1,17 +1,21 @@
 """Utilities for writing tests
 """
+# future/compat
 import six
-from builtins import str
+from future.utils import with_metaclass
+
+# stdlib
 import threading
-
-import unittest
 import types
-
+import unittest
+from builtins import str
 from unittest.case import expectedFailure
+
+from nose.plugins import attrib
+from nose.tools import nottest
 
 from generic_utils import five
 from generic_utils import loggingtools
-from future.utils import with_metaclass
 
 try:
     from ddt import ddt, mk_test_name, add_test, data as ddt_data, UNPACK_ATTR, DATA_ATTR, FILE_ATTR, process_file_data
@@ -28,8 +32,6 @@ except ImportError:
         raise RuntimeError("In order to use the data decorator you must install python-utils with the "
                            "'test_utils' extras package; eg python-utils['test_utils']")
 
-from nose.plugins import attrib
-from nose.tools import nottest
 
 JIRA_ATTR_NAME = "jira"
 

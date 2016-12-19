@@ -1,11 +1,11 @@
 """Additional 2/3 compatibility helpers"""
-import codecs
-import unittest
-
-import functools
-
-
+# future/compat
 import six
+
+# stdlib
+import codecs
+import functools
+import unittest
 
 if six.PY2:
     def bytes_if_py2(val):

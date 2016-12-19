@@ -1,14 +1,15 @@
+# stdlib
 import logging
 
 from mock import patch
+
 from generic_utils import loggingtools
-from generic_utils.loggingtools.dynamic_logger import DynamicLogLevelLogger
-from generic_utils.loggingtools.loggingconfig import LoggingLevelManager, \
-    InMemoryLogLevelProvider
 from generic_utils.loggingtools import dynamic_logger
+from generic_utils.loggingtools.dynamic_logger import DynamicLogLevelLogger
+from generic_utils.loggingtools.loggingconfig import InMemoryLogLevelProvider
+from generic_utils.loggingtools.loggingconfig import LoggingLevelManager
 from generic_utils.loggingtools.test_utils import LoggingSpy
 from generic_utils.test import TestCase
-
 
 LOG = loggingtools.getLogger()
 

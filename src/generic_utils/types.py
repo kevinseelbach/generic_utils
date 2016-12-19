@@ -1,10 +1,13 @@
-from builtins import map
+# future/compat
 from past.builtins import basestring
-import sys
-from textwrap import dedent
-from keyword import iskeyword
-from generic_utils import loggingtools
 
+# stdlib
+import sys
+from builtins import map
+from keyword import iskeyword
+from textwrap import dedent
+
+from generic_utils import loggingtools
 
 LOG = loggingtools.getLogger()
 
@@ -142,4 +145,3 @@ def recordtype(typename, field_names, verbose=False, **default_kwds):
     if hasattr(sys, '_getframe') and sys.platform != 'cli':
         cls.__module__ = sys._getframe(1).f_globals['__name__']
     return cls
-

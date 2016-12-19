@@ -1,17 +1,23 @@
 """Celery test case mixin."""
-from builtins import object
-from multiprocessing import Process, Manager
-from celery.worker import state
-from celery.beat import EmbeddedService
-from celery.result import allow_join_result
-from celery_testutils import CELERY_TEST_CONFIG_MEMORY, setup_celery_worker, CeleryWorkerThread
-from kombu.transport.memory import Transport
-from nose.tools import nottest
-from generic_utils import loggingtools
-
-from generic_utils.test import TestCaseMixinMetaClass
+# future/compat
 from future.utils import with_metaclass
 
+# stdlib
+from builtins import object
+from multiprocessing import Manager
+from multiprocessing import Process
+
+from celery.beat import EmbeddedService
+from celery.result import allow_join_result
+from celery.worker import state
+from celery_testutils import CELERY_TEST_CONFIG_MEMORY
+from celery_testutils import CeleryWorkerThread
+from celery_testutils import setup_celery_worker
+from kombu.transport.memory import Transport
+from nose.tools import nottest
+
+from generic_utils import loggingtools
+from generic_utils.test import TestCaseMixinMetaClass
 
 LOG = loggingtools.getLogger()
 

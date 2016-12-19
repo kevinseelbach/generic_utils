@@ -1,6 +1,8 @@
+# stdlib
 import os
-from generic_utils import loggingtools
 from contextlib import contextmanager
+
+from generic_utils import loggingtools
 
 log = loggingtools.getLogger(__name__)
 
@@ -32,4 +34,3 @@ def environment_var(key, val):
         else:
             os.environ[key] = old_val
             log.debug("Reset environment variable '%s' back to '%s'", key, old_val)
-

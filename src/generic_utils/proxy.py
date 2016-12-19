@@ -1,5 +1,8 @@
-from builtins import str
+# stdlib
 from builtins import object
+from builtins import str
+
+
 class Proxy(object):
     """
     Proxies an object and allows for injecting behavior into the representation of the object without modifying the

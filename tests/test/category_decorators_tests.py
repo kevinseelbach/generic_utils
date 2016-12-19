@@ -1,5 +1,12 @@
-from generic_utils.test.category_decorators import TEST_CATEGORY_ATTR_NAME, slow_test, TestCategory, system_test, \
-    TestType, test_category, integration_test, TEST_TYPE_ATTR_NAME
+from generic_utils.test.category_decorators import TEST_CATEGORY_ATTR_NAME
+from generic_utils.test.category_decorators import TEST_TYPE_ATTR_NAME
+from generic_utils.test.category_decorators import TestCategory
+from generic_utils.test.category_decorators import TestType
+from generic_utils.test.category_decorators import integration_test
+from generic_utils.test.category_decorators import slow_test
+from generic_utils.test.category_decorators import system_test
+from generic_utils.test.category_decorators import test_category
+
 from .decorators_tests import AttrTestCase
 
 

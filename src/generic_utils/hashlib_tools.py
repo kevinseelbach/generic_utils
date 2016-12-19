@@ -1,7 +1,9 @@
 """
 Tools for using hashlib
 """
+# stdlib
 import hashlib
+
 from generic_utils import five
 
 

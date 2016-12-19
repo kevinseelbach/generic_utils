@@ -1,6 +1,9 @@
-from builtins import object
-import inspect
+# future/compat
 from future.utils import with_metaclass
+
+# stdlib
+import inspect
+from builtins import object
 
 
 class MetaClass(type):

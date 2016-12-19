@@ -1,17 +1,21 @@
 """Various tools for working with the Cassandra schema
 """
+# future/compat
 from past.builtins import basestring
-from importlib import import_module
+
+# stdlib
 import inspect
+from importlib import import_module
+
 from cassandra import AlreadyExists
 from cassandra.cqlengine import connection as cql_connection
 from cassandra.cqlengine import management
-from cassandra.cqlengine.models import Model as cqlengine_Model
 from cassandra.cqlengine.connection import get_cluster
+from cassandra.cqlengine.models import Model as cqlengine_Model
 
 from generic_utils import loggingtools
-from generic_utils.typetools import as_iterable
 from generic_utils.cassandra_utils.cqlengine_tools.connection import setup_connection_from_config
+from generic_utils.typetools import as_iterable
 
 log = loggingtools.getLogger()
 

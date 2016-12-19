@@ -1,18 +1,25 @@
 """Module which contains utilities for writing tests using Cassandra
 
 """
-from unittest import SkipTest
-import warnings
-from cassandra.cluster import NoHostAvailable  # pylint: disable=no-name-in-module
-from cassandra.cqlengine import management
-from cassandra.cqlengine import CQLEngineException
-from generic_utils import loggingtools
-from generic_utils.cassandra_utils.cqlengine_tools.connection import setup_connection_from_config, \
-    is_cassandra_available as prod_is_cassandra_available
-from generic_utils.cassandra_utils.cqlengine_tools.schema_tools import truncate_table, create_keyspace_from_model
-from generic_utils.test import TestCaseMixinMetaClass, TestCase
+# future/compat
 from future.utils import with_metaclass
 
+# stdlib
+import warnings
+from unittest import SkipTest
+
+from cassandra.cluster import NoHostAvailable  # pylint: disable=no-name-in-module
+from cassandra.cqlengine import CQLEngineException
+from cassandra.cqlengine import management
+
+from generic_utils import loggingtools
+from generic_utils.cassandra_utils.cqlengine_tools.connection import \
+    is_cassandra_available as prod_is_cassandra_available
+from generic_utils.cassandra_utils.cqlengine_tools.connection import setup_connection_from_config
+from generic_utils.cassandra_utils.cqlengine_tools.schema_tools import create_keyspace_from_model
+from generic_utils.cassandra_utils.cqlengine_tools.schema_tools import truncate_table
+from generic_utils.test import TestCase
+from generic_utils.test import TestCaseMixinMetaClass
 
 log = loggingtools.getLogger()
 

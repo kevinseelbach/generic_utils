@@ -1,10 +1,13 @@
 """
 Utilities for redis
 """
-from builtins import str
+# stdlib
 from builtins import object
-from generic_utils.config import get_config_value
+from builtins import str
+
 from redis.client import StrictRedis
+
+from generic_utils.config import get_config_value
 
 DEFAULT_URL_PATTERN = "redis://{user_info}{host}:{port}/{db}"
 USER_PATTERN = "{username}{password}@"

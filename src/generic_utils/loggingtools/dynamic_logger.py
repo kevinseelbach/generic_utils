@@ -2,12 +2,16 @@
 a logging level manager which allows for runtime log level changes from any log level provider(whether file based,
 database based, etc)
 """
+# stdlib
 from builtins import str
-from logging import Logger, NOTSET as logging_NOTSET, setLoggerClass, getLoggerClass
+from logging import NOTSET as logging_NOTSET
+from logging import Logger
+from logging import getLoggerClass
+from logging import setLoggerClass
+
+from generic_utils import NOTSET
 from generic_utils.classtools import get_classfqn
 from generic_utils.typetools import as_iterable
-from generic_utils import NOTSET
-
 
 _logging_level_manager = None  # pylint: disable=invalid-name
 

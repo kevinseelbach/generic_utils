@@ -1,12 +1,13 @@
 """Tools for working with iterators"""
-from builtins import zip
+# stdlib
 from builtins import next
-from builtins import range
 from builtins import object
+from builtins import range
+from builtins import zip
 from inspect import getmembers
 
-from generic_utils.exceptions import GenUtilsTypeError
 from generic_utils import loggingtools
+from generic_utils.exceptions import GenUtilsTypeError
 
 LOG = loggingtools.getLogger()
 

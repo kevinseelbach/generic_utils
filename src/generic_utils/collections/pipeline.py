@@ -1,9 +1,13 @@
 """Generic pipeline."""
-from builtins import range
+# stdlib
 from builtins import object
-from generic_utils.collections.exceptions import InvalidStageException, PipelineException, PipelineSuccessExit, \
-    PipelineErrorExit
+from builtins import range
+
 from generic_utils import loggingtools
+from generic_utils.collections.exceptions import InvalidStageException
+from generic_utils.collections.exceptions import PipelineErrorExit
+from generic_utils.collections.exceptions import PipelineException
+from generic_utils.collections.exceptions import PipelineSuccessExit
 from generic_utils.typetools import as_iterable
 
 LOG = loggingtools.getLogger()

@@ -36,18 +36,26 @@ NOTE:  This is not thread safe such that you cannot run multiple tests in parall
     internal responsibilities and as a Kombu service.
 """
 from __future__ import print_function
-from builtins import str
-import os
-import sys
-import signal
-from multiprocessing.managers import SyncManager, DictProxy, ListProxy, RemoteError
-from multiprocessing import Process
+
+# stdlib
 import multiprocessing
+import os
+import signal
+import sys
+from builtins import str
+from multiprocessing import Process
+from multiprocessing.managers import DictProxy
+from multiprocessing.managers import ListProxy
+from multiprocessing.managers import RemoteError
+from multiprocessing.managers import SyncManager
+
 from kombu.exceptions import InconsistencyError
 from kombu.transport import TRANSPORT_ALIASES
-from kombu.transport.memory import Channel as MemoryChannel, Transport as MemoryTransport
+from kombu.transport.memory import Channel as MemoryChannel
+from kombu.transport.memory import Transport as MemoryTransport
 from kombu.transport.redis import NO_ROUTE_ERROR
 from kombu.utils.encoding import bytes_to_str
+
 from generic_utils import loggingtools
 
 # pylint: disable=global-statement

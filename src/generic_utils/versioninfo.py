@@ -1,11 +1,14 @@
 from __future__ import absolute_import
 
+# future/compat
 import six
+
+# stdlib
 import calendar
 import datetime
+import hashlib
 import os
 import re
-import hashlib
 from functools import reduce
 
 from generic_utils import five

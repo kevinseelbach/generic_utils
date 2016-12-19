@@ -1,10 +1,17 @@
 """Tools for simplifying mocking of objects
 """
-import io
+# future/compat
 import six
+
+# stdlib
+import io
+
 from mock import patch
-from generic_utils.contextlib_ex import ExplicitContextManagerMixin, ContextDecorator, ExplicitContextDecorator
+
 from generic_utils import loggingtools
+from generic_utils.contextlib_ex import ContextDecorator
+from generic_utils.contextlib_ex import ExplicitContextDecorator
+from generic_utils.contextlib_ex import ExplicitContextManagerMixin
 
 LOG = loggingtools.getLogger()
 

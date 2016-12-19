@@ -1,6 +1,8 @@
-from builtins import range
+# stdlib
 import logging
+from builtins import range
 from unittest import TestCase
+
 from generic_utils.typetools import is_iterable
 
 log = logging.getLogger(__name__)

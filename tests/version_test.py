@@ -1,14 +1,18 @@
-from builtins import str
-from builtins import zip
-from builtins import range
+# stdlib
+import hashlib
 import inspect
 import os
 import pickle
 import random
-import hashlib
+from builtins import range
+from builtins import str
+from builtins import zip
 from unittest import TestCase
-from generic_utils import versioninfo, loggingtools
-from generic_utils.versioninfo import Version, GuidMixin
+
+from generic_utils import loggingtools
+from generic_utils import versioninfo
+from generic_utils.versioninfo import GuidMixin
+from generic_utils.versioninfo import Version
 
 log = loggingtools.getLogger()
 

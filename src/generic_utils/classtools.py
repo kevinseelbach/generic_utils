@@ -1,6 +1,7 @@
 """Functions to assist programming various things with classes."""
-from builtins import object
+# stdlib
 import inspect
+from builtins import object
 from importlib import import_module
 
 from . import loggingtools

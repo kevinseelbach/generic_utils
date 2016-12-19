@@ -3,9 +3,8 @@
 from mock import patch
 
 from generic_utils import loggingtools
-from generic_utils.contextlib_ex import ExplicitContextDecorator
 from generic_utils.config import config
-
+from generic_utils.contextlib_ex import ExplicitContextDecorator
 
 LOG = loggingtools.getLogger()
 

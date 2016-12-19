@@ -1,7 +1,9 @@
 """Custom exceptions for ExecutionContext package
 """
 
-from generic_utils.exceptions import GenUtilsKeyError, GenUtilsRuntimeError, GenUtilsException
+from generic_utils.exceptions import GenUtilsException
+from generic_utils.exceptions import GenUtilsKeyError
+from generic_utils.exceptions import GenUtilsRuntimeError
 
 
 class ExecutionContextStackEmptyError(GenUtilsException):

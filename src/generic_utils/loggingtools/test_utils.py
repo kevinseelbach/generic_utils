@@ -1,10 +1,12 @@
 """Various utilities for dealing with logging within tests
 """
-from builtins import str
-from builtins import object
+# stdlib
 import logging
 import re
+from builtins import object
+from builtins import str
 from logging.handlers import MemoryHandler
+
 from generic_utils.contextlib_ex import ExplicitContextDecorator
 from generic_utils.typetools import as_iterable
 

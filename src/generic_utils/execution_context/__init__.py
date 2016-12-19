@@ -1,15 +1,19 @@
 """Classes to define ExecutionContext concepts which contain any special configuration / context data needed at runtime
 """
-from builtins import object
+# stdlib
 import copy
 import threading
+from builtins import object
 
-from generic_utils import loggingtools, NOTSET
+from generic_utils import NOTSET
+from generic_utils import loggingtools
 from generic_utils import threads
 from generic_utils.contextlib_ex import ExplicitContextDecorator
-from generic_utils.exceptions import GenUtilsValueError, GenUtilsTypeError, GenUtilsAttributeError
-from generic_utils.execution_context.exceptions import ExecutionContextValueDoesNotExist, \
-    ExecutionContextStackEmptyError
+from generic_utils.exceptions import GenUtilsAttributeError
+from generic_utils.exceptions import GenUtilsTypeError
+from generic_utils.exceptions import GenUtilsValueError
+from generic_utils.execution_context.exceptions import ExecutionContextStackEmptyError
+from generic_utils.execution_context.exceptions import ExecutionContextValueDoesNotExist
 from generic_utils.typetools import as_iterable
 
 LOG = loggingtools.getLogger()

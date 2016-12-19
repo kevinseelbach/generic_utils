@@ -1,9 +1,13 @@
+# stdlib
 from unittest import TestCase
 
 from generic_utils import loggingtools
 from generic_utils.config.test_utils import override_config
-from generic_utils.statsdtools import STATSD_NULL_CLIENT_TYPE, _get_statsd_from_config, NullStatsClient, \
-    TestCaseStatsClient, STATSD_TESTCASE_CLIENT_TYPE
+from generic_utils.statsdtools import STATSD_NULL_CLIENT_TYPE
+from generic_utils.statsdtools import STATSD_TESTCASE_CLIENT_TYPE
+from generic_utils.statsdtools import NullStatsClient
+from generic_utils.statsdtools import TestCaseStatsClient
+from generic_utils.statsdtools import _get_statsd_from_config
 
 log = loggingtools.getLogger()
 
@@ -66,6 +70,3 @@ class CacheStatsClientTestCase(TestCase):
             self.assertEqual(statsd_client.cache['setval|set'], [[12, 1]])
             self.assertEqual(statsd_client.cache['decr|count'], [[-1, 1]])
             self.assertEqual(statsd_client.cache['gauge|gauge'], [[10, 1]])
-
-
-

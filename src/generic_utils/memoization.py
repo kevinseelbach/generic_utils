@@ -1,6 +1,9 @@
 
-from builtins import str
+# stdlib
 from builtins import object
+from builtins import str
+
+
 class Memoize(object):
     """
     Function decorator which will memoize the results of a function call based on the parameters passed to the function
@@ -16,4 +19,3 @@ class Memoize(object):
             tmp = self.f(*args, **kwargs)
             self.mem[args, str(kwargs)] = tmp
             return tmp
-

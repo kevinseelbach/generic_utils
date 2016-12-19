@@ -1,10 +1,10 @@
-from pylint.checkers.base import DocStringChecker
-from pylint.checkers.design_analysis import MisdesignChecker
-from pylint.checkers.classes import ClassChecker
-from pylint.checkers.newstyle import NewStyleConflictChecker
 from astroid.nodes import Class
-from pylint_plugin_utils import suppress_message
+from pylint.checkers.base import DocStringChecker
+from pylint.checkers.classes import ClassChecker
+from pylint.checkers.design_analysis import MisdesignChecker
+from pylint.checkers.newstyle import NewStyleConflictChecker
 from pylint_django.utils import node_is_subclass
+from pylint_plugin_utils import suppress_message
 
 
 def is_class(class_name):

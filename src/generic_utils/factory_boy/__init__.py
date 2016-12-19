@@ -1,4 +1,7 @@
+# stdlib
 from builtins import object
+
+
 class FactoryMemoizer(object):
     """
     Helper class which allows for wrapping a Factory and memoizing inputs into the

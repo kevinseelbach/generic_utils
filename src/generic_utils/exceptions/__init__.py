@@ -1,6 +1,7 @@
 """Core base exceptions as well as standard exceptions that are generally applicable
 """
 from __future__ import absolute_import
+
 from generic_utils.classtools import get_class_attributes
 
 

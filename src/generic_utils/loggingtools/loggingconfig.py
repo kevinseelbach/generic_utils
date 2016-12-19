@@ -1,17 +1,20 @@
 """Module which provides tools for dealing with logging configuration, primarily with providing log configuration at
 runtime from any provider backend.
 """
+# stdlib
+import logging
+import threading
 from builtins import object
 from collections import namedtuple
-import logging
-from . import getLogger
-import threading
+
 from generic_utils import NOTSET
-from generic_utils.mixins import comparable
 from generic_utils.classtools import get_instance_from_fqn
 from generic_utils.config import config
 from generic_utils.datetimetools import utcnow
+from generic_utils.mixins import comparable
 from generic_utils.typetools import as_iterable
+
+from . import getLogger
 
 LOG = getLogger()
 

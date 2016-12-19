@@ -1,14 +1,18 @@
 """Helper utilities for dealing with python logging
 """
+# future/compat
+from six import StringIO
+
+# stdlib
 import inspect
 import logging
 import os
 import traceback
-from six import StringIO
-
 from logging.handlers import SysLogHandler as python_SysLogHandler
 from logging.handlers import SYSLOG_UDP_PORT
-from generic_utils.inspecttools import get_calling_frame, is_module_frame
+
+from generic_utils.inspecttools import get_calling_frame
+from generic_utils.inspecttools import is_module_frame
 
 # Namespace logging under a prefix.
 # For example a logger should be created by one of either:

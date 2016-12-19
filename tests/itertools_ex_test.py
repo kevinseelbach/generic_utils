@@ -1,14 +1,22 @@
 from __future__ import division
-from builtins import range
+
+# future/compat
 from past.utils import old_div
-from builtins import object
+
+# stdlib
 import logging
 import sys
 import types
+from builtins import object
+from builtins import range
 from inspect import getmembers
 from unittest import TestCase
 
-from generic_utils.itertools_ex import ibatch, iiterex, reverse_enumerate, index_of, IteratorProxy
+from generic_utils.itertools_ex import IteratorProxy
+from generic_utils.itertools_ex import ibatch
+from generic_utils.itertools_ex import iiterex
+from generic_utils.itertools_ex import index_of
+from generic_utils.itertools_ex import reverse_enumerate
 
 log = logging.getLogger(__name__)
 
@@ -256,4 +264,3 @@ class IndexOfTestCase(TestCase):
                     raise
 
             test_case_idx += 1
-

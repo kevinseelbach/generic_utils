@@ -1,12 +1,15 @@
+# stdlib
 import datetime
 import logging
+
 from freezegun import freeze_time
+
 from generic_utils import loggingtools
 from generic_utils.datetimetools import utcnow
-from generic_utils.loggingtools.loggingconfig import InMemoryLogLevelProvider, LevelOverride, \
-    LogLevelProviderCollection
+from generic_utils.loggingtools.loggingconfig import InMemoryLogLevelProvider
+from generic_utils.loggingtools.loggingconfig import LevelOverride
+from generic_utils.loggingtools.loggingconfig import LogLevelProviderCollection
 from generic_utils.test import TestCase
-
 
 LOG = loggingtools.getLogger()
 

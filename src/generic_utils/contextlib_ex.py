@@ -1,10 +1,12 @@
 """Utilities for dealing with Context Managers and the like
 """
 from __future__ import absolute_import
-from builtins import object
+
+# stdlib
 import functools
-from functools import update_wrapper
 import importlib
+from builtins import object
+from functools import update_wrapper
 
 # Import types using import_module because the relative module "types" is shadowing the global types
 types = importlib.import_module('types')  # pylint: disable=invalid-name

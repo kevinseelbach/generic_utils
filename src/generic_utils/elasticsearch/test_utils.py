@@ -1,16 +1,19 @@
 """
 ElasticsearchTestCaseMixin module.
 """
+# future/compat
+from future.utils import with_metaclass
+
+# stdlib
 from builtins import object
 from os import environ
 from unittest import SkipTest
+
 from elasticsearch import Elasticsearch
 
 from generic_utils import loggingtools
 from generic_utils.test import TestCaseMixinMetaClass
 from generic_utils.test.category_decorators import integration_test
-from future.utils import with_metaclass
-
 
 LOG = loggingtools.getLogger()
 

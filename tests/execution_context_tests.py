@@ -1,13 +1,20 @@
 """Tests for ExecutionContext concepts"""
+from generic_utils import NOTSET
+from generic_utils import loggingtools
 from generic_utils.datetimetools import utcnow
-from generic_utils.exceptions import GenUtilsAttributeError, GenUtilsValueError, GenUtilsTypeError
-from generic_utils.execution_context import BaseExecutionContext, \
-    ThreadLocalExecutionContext, execution_context_stack, as_execution_context, ExecutionContextStack, \
-    ExecutionContextStackEmptyError
+from generic_utils.exceptions import GenUtilsAttributeError
+from generic_utils.exceptions import GenUtilsTypeError
+from generic_utils.exceptions import GenUtilsValueError
+from generic_utils.execution_context import BaseExecutionContext
+from generic_utils.execution_context import ExecutionContextStack
+from generic_utils.execution_context import ExecutionContextStackEmptyError
+from generic_utils.execution_context import ThreadLocalExecutionContext
+from generic_utils.execution_context import as_execution_context
+from generic_utils.execution_context import execution_context_stack
 from generic_utils.execution_context.exceptions import ExecutionContextValueDoesNotExist
-from generic_utils.json_tools.serialization import dumps, loads
+from generic_utils.json_tools.serialization import dumps
+from generic_utils.json_tools.serialization import loads
 from generic_utils.test import TestCase
-from generic_utils import loggingtools, NOTSET
 
 LOG = loggingtools.getLogger()
 

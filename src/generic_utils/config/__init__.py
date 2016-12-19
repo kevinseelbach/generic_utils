@@ -2,19 +2,27 @@
 Generic configuration interface and module which allows for exposing environment/application configuration through a
 generic uniformly available interface
 """
-from builtins import str
+# future/compat
 from past.builtins import basestring
-from builtins import object
-import inspect
 
-import os
-import importlib
-from generic_utils import loggingtools, NOTSET
+# stdlib
 import ast
-from generic_utils.base_utils import ImmutableMixin, ImmutableDelay
+import importlib
+import inspect
+import os
+from builtins import object
+from builtins import str
+
+from generic_utils import NOTSET
+from generic_utils import loggingtools
+from generic_utils.base_utils import ImmutableDelay
+from generic_utils.base_utils import ImmutableMixin
 from generic_utils.classtools import get_classfqn
-from generic_utils.contextlib_ex import ContextDecorator, ExplicitContextDecorator
-from ..typetools import is_iterable, parse_bool
+from generic_utils.contextlib_ex import ContextDecorator
+from generic_utils.contextlib_ex import ExplicitContextDecorator
+
+from ..typetools import is_iterable
+from ..typetools import parse_bool
 
 log = loggingtools.getLogger()
 

@@ -1,7 +1,10 @@
+# stdlib
 import logging
 from unittest import TestCase
-from generic_utils.base_utils import ImmutableMixin, ImmutableDelay, ImmutableObjectException
 
+from generic_utils.base_utils import ImmutableDelay
+from generic_utils.base_utils import ImmutableMixin
+from generic_utils.base_utils import ImmutableObjectException
 
 log = logging.getLogger(__name__)
 

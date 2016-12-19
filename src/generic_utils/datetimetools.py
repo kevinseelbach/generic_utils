@@ -2,7 +2,11 @@
 Helpful utilities for doing date/time manipulation.
 """
 from __future__ import division
-from datetime import datetime, tzinfo, timedelta
+
+# stdlib
+from datetime import datetime
+from datetime import timedelta
+from datetime import tzinfo
 
 from generic_utils import loggingtools
 
@@ -149,4 +153,3 @@ def datetime_range(begin, end, step):
     :rtype: list[datetime.datetime]
     """
     return list(datetime_xrange(begin, end, step))
-

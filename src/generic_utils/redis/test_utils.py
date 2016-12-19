@@ -1,15 +1,19 @@
-from builtins import object
-import new
-from generic_utils import loggingtools
-from generic_utils.test import TestCaseMixinMetaClass
-import os
-from functools import update_wrapper
-from unittest import SkipTest
-from redis import ConnectionError
-
-from .utils import get_client_url
+# future/compat
 from future.utils import with_metaclass
 
+# stdlib
+import new
+import os
+from builtins import object
+from functools import update_wrapper
+from unittest import SkipTest
+
+from redis import ConnectionError
+
+from generic_utils import loggingtools
+from generic_utils.test import TestCaseMixinMetaClass
+
+from .utils import get_client_url
 
 log = loggingtools.getLogger(__name__)
 

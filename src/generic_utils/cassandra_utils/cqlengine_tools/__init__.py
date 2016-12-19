@@ -8,5 +8,4 @@ except ImportError:
 
 from .data_type import TimezoneAwareDateType
 
-
 TimezoneAwareDateType.set_as_default_datetype()

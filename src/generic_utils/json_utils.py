@@ -3,6 +3,8 @@ Functions which support creating dicts (mappings) with interesting structures an
  values which may be nested deeply within the object.
 """
 from __future__ import absolute_import
+
+# stdlib
 import collections
 
 

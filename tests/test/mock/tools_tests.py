@@ -1,5 +1,14 @@
 """Tests for generic_utils.test.mock.tools"""
+# stdlib
+from functools import reduce
 from unittest import TestCase
+
+import mock
+from mock import patch
+
+from generic_utils import loggingtools
+from generic_utils.test.mock.tools import patch_urlopen_with_file
+from generic_utils.test.mock.tools import spy_object
 
 try:
     import urllib.request
@@ -7,11 +16,6 @@ try:
 except ImportError:     # python 2
     import urllib2
 
-import mock
-from mock import patch
-from generic_utils import loggingtools
-from generic_utils.test.mock.tools import spy_object, patch_urlopen_with_file
-from functools import reduce
 
 
 LOG = loggingtools.getLogger()

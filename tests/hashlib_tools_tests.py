@@ -1,10 +1,12 @@
 """Tests for generic_utils.hashlib_tools
 """
+# future/compat
+import six
+
+# stdlib
 import hashlib
 import os
 import unittest
-
-import six
 
 from generic_utils import five
 from generic_utils.hashlib_tools import get_chunked_hash

@@ -1,16 +1,20 @@
 """
 Module which defines custom Cassandra data types or extensions to core Cassandra data types.
 """
+# future/compat
 from past.builtins import basestring
+
+# stdlib
 import pickle
 
+from cassandra.cqlengine import ValidationError
+from cassandra.cqlengine import columns
 from cassandra.cqltypes import DateType  # pylint: disable=no-name-in-module
 from cassandra.protocol import ResultMessage  # pylint: disable=no-name-in-module
-from cassandra.cqlengine import columns, ValidationError
-from generic_utils import loggingtools
-from generic_utils.json_tools import serialization
-from generic_utils.datetimetools import utc
 
+from generic_utils import loggingtools
+from generic_utils.datetimetools import utc
+from generic_utils.json_tools import serialization
 
 log = loggingtools.getLogger()
 

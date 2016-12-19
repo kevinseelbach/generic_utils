@@ -1,12 +1,14 @@
 """Tests for generic_utils.collections.pipeline"""
+# stdlib
 from unittest import TestCase
+
 from nose.tools import nottest
 
-from generic_utils.collections.pipeline import Pipeline
-from generic_utils.collections.exceptions import InvalidStageException, PipelineSuccessExit, PipelineErrorExit
-
 from generic_utils import loggingtools
-
+from generic_utils.collections.exceptions import InvalidStageException
+from generic_utils.collections.exceptions import PipelineErrorExit
+from generic_utils.collections.exceptions import PipelineSuccessExit
+from generic_utils.collections.pipeline import Pipeline
 
 LOG = loggingtools.getLogger()
 
@@ -171,5 +173,3 @@ class PipelineTestCase(TestCase):
         test_pipeline = Pipeline(stage_a, stage_b, stage_c, transition_filters=trans_filter)
         pipeline_result = test_pipeline.start(*pipeline_callargs)
         self.assertEqual(pipeline_result, expected_result)
-
-
