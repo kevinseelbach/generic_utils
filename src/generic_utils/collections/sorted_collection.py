@@ -1,6 +1,7 @@
 """Provides a sorted collection that is much easier to work with than using bisect() directly"""
-# pylint: disable=missing-docstring
-from bisect import bisect_left, bisect_right
+# stdlib
+from bisect import bisect_left
+from bisect import bisect_right
 
 
 # Pulled from http://code.activestate.com/recipes/577197-sortedcollection/

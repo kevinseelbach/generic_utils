@@ -1,6 +1,7 @@
 """Core base exceptions as well as standard exceptions that are generally applicable
 """
 from __future__ import absolute_import
+
 from generic_utils.classtools import get_class_attributes
 
 
@@ -50,7 +51,7 @@ class GenUtilsException(Exception):
     def _set_kwargs(self, kwargs):
         """Sets the values of the kwargs of the init of the exception as attributes on the exception instance
         """
-        for key, val in kwargs.iteritems():
+        for key, val in kwargs.items():
             try:
                 if key.startswith("_"):
                     raise IllegalArgumentException("Illegal argument {argument_name}.  Cannot provide private "

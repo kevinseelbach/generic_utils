@@ -1,8 +1,13 @@
-import logging
+# future/compat
+from builtins import range
+
+# stdlib
 from unittest import TestCase
+
+from generic_utils import loggingtools
 from generic_utils.typetools import is_iterable
 
-log = logging.getLogger(__name__)
+log = loggingtools.getLogger(__name__)
 
 
 class GeneralTestCase(TestCase):

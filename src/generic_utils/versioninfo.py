@@ -1,9 +1,18 @@
+from __future__ import absolute_import
+
+# future/compat
+import six
+
+# stdlib
 import calendar
 import datetime
+import hashlib
 import os
 import re
-import hashlib
+from functools import reduce
 
+from generic_utils import five
+from generic_utils.mixins import comparable
 
 VERSION_PATTERN_PREFIX = "__version_"
 VERSION_PATTERN = ''.join([VERSION_PATTERN_PREFIX, "%s__"])
@@ -23,6 +32,7 @@ FULL_VERSION_PATTERN = "%d.%02d.%02d"
 def _optional(ptrn):
     return r"(?:" + ptrn + r")?"
 
+
 # To make it easier to read, the full reg exp is broken up by component and then just appended together
 VERSION_RE = "".join([
     r"(?P<major>\d+?)",
@@ -40,16 +50,16 @@ BUILD_VAL_NAMES = ["build", "build_v2"]
 try:
     # Since this module is used within the mercurial extensions, we don't have access to all of python-utils, so we
     # need to guard importing of the logger
-    from loggingtools import getLogger
+    from .loggingtools import getLogger
+
     log = getLogger()
 except ImportError:
     log = None
 
 
-class Version(object):
-
+class Version(comparable.ComparableMixin):
     def __init__(self, major, year=None, week=None, patch=None, build=None):
-        if isinstance(major, basestring) and year is None:
+        if isinstance(major, six.string_types) and year is None:
             ver = Version.from_string(major)
             if ver is None:
                 raise ValueError("'%s' is not a valid version string" % major)
@@ -71,12 +81,20 @@ class Version(object):
     def __str__(self):
         return self.__unicode__()
 
-    def __cmp__(self, other):
-        if isinstance(other, basestring):
-            other = Version(other)
+    def _cmpkey(self):
+        """Return 0 if all version info is None / 0"""
+        return self.major, self.year, self.week, self.patch, self.build or 0
 
-        return cmp((self.major, self.year, self.week, self.patch, self.build or 0),
-                   (other.major, other.year, other.week, other.patch, other.build or 0))
+    def _compare(self, other, method):
+        """Python 3 ignores the __cmp__() method; so we implement a ComparableMixin for rich comparison
+        :param other:
+        :type other: Version | basestring
+        :return:
+        :rtype: bool
+        """
+        if isinstance(other, six.string_types):
+            other = Version(other)
+        return super(Version, self)._compare(other, method)
 
     def __unicode__(self):
         version_string = self.to_version_string()
@@ -245,7 +263,7 @@ class GuidMixin(object):
     """Extend classes with a guid concept for uniqueness.
     """
     hashing_fnc = hashlib.sha256
-    GUID_INPUTS_SEPARATOR = "~"
+    GUID_INPUTS_SEPARATOR = u"~"
     GUID_INPUTS_ESCAPE = r'\{sep}\{sep}'.format(sep=GUID_INPUTS_SEPARATOR)
     _guid = None
 
@@ -273,8 +291,7 @@ class GuidMixin(object):
 
         inputs = [input_value.replace(self.GUID_INPUTS_SEPARATOR, self.GUID_INPUTS_ESCAPE)
                   for input_value in inputs_to_guid]
-        guid.update(self.GUID_INPUTS_SEPARATOR.join(inputs))
-
+        guid.update(five.b(self.GUID_INPUTS_SEPARATOR.join(inputs)))
         return guid.hexdigest()
 
     def _get_guid_inputs(self):

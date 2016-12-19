@@ -1,11 +1,24 @@
 """Tests for generic_utils.test.mock.tools"""
-import urllib2
+# stdlib
+from functools import reduce
 from unittest import TestCase
 
-from mock import patch
 import mock
+from mock import patch
 
-from generic_utils.test.mock.tools import spy_object, patch_urlopen_with_file
+from generic_utils import loggingtools
+from generic_utils.test.mock.tools import patch_urlopen_with_file
+from generic_utils.test.mock.tools import spy_object
+
+try:
+    import urllib.request
+    urllib2 = urllib.request
+except ImportError:     # python 2
+    import urllib2
+
+
+
+LOG = loggingtools.getLogger()
 
 
 class MyTestObject(object):
@@ -93,12 +106,9 @@ class PatchUrlopenWithFileTestCase(TestCase):
     def test_patch_urlopen_with_file(self):
         """Validate that using the patch_urlopen_with_file context manager works as expected
         """
-        with patch('__builtin__.open') as my_mock:
-            my_mock.return_value.__enter__ = lambda s: s
-            my_mock.return_value.__exit__ = mock.Mock()
-            my_mock.return_value.read.return_value = self.test_file_content
-
+        with patch('io.open', mock.mock_open(read_data=self.test_file_content), create=True) as mocked_open:
             with patch_urlopen_with_file("dummy_filename"):
+                LOG.debug("urlopen={0}.{1}".format(urllib2.urlopen.__module__, urllib2.urlopen.func_name))
                 response = urllib2.urlopen("http://example.com")
                 self.assertEqual(response.read(), self.test_file_content)
-                my_mock.assert_called_with("dummy_filename", "r")
+                mocked_open.assert_called_with("dummy_filename", "r")

@@ -1,7 +1,10 @@
 """Tests for exceptions utils"""
+# stdlib
 from unittest import TestCase
+
 from generic_utils import loggingtools
-from generic_utils.exceptions import GenUtilsValueError, GenUtilsTypeError
+from generic_utils.exceptions import GenUtilsTypeError
+from generic_utils.exceptions import GenUtilsValueError
 from generic_utils.exceptions.utils import suppress_safe_exceptions
 
 LOG = loggingtools.getLogger()
@@ -81,10 +84,3 @@ class SuppressSafeExceptionsTestCase(TestCase):
     def _suppress_as_decorator(exc):
         """For Testing only"""
         raise exc
-
-
-
-
-
-
-

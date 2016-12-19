@@ -1,8 +1,15 @@
 """Tools for working with iterators"""
+# future/compat
+from builtins import next
+from builtins import object
+from builtins import range
+from builtins import zip
+
+# stdlib
 from inspect import getmembers
-from itertools import izip
-from generic_utils.exceptions import GenUtilsTypeError
+
 from generic_utils import loggingtools
+from generic_utils.exceptions import GenUtilsTypeError
 
 LOG = loggingtools.getLogger()
 
@@ -51,7 +58,7 @@ class IteratorProxy(object):
         self._dataiterator_stack = [iter(self._proxied_data)]
         return self
 
-    def next(self):
+    def __next__(self):
         """
         :return:
         :rtype:
@@ -96,7 +103,7 @@ def reverse_enumerate(iterable):
     reverse_enumerate is useful for obtaining an indexed list in reverse order:
         (len(seq) - 1, seq[-1]), (len(seq) - 2, seq[-2]), (len(seq) - 3, seq[-3]), ...
     """
-    return izip(xrange(len(iterable)-1, -1, -1), reversed(iterable))
+    return zip(range(len(iterable)-1, -1, -1), reversed(iterable))
 
 
 def iiterex(iterable, callback=None, **kwargs):

@@ -1,7 +1,10 @@
 """Tests for
 """
+# stdlib
 from unittest import TestCase
+
 from generic_utils.dict_utils import lower_keys
+
 
 class DictUtilsTestCase(TestCase):
     def test_lower_keys(self):

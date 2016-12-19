@@ -3,6 +3,8 @@ Functions which support creating dicts (mappings) with interesting structures an
  values which may be nested deeply within the object.
 """
 from __future__ import absolute_import
+
+# stdlib
 import collections
 
 
@@ -16,7 +18,7 @@ def query_json_struct_from_path(json_struct, path):
     if json_struct is None:
         return None
     assert isinstance(json_struct, collections.Mapping)
-    if path is None or not (isinstance(path, str) or isinstance(path, unicode)):
+    if path is None or not (isinstance(path, str) or isinstance(path, str)):
         return None
     else:
         return path_query(json_struct, path.split('.'))
@@ -71,7 +73,7 @@ def multi_update_json_struct(json_struct, new_attr_vals, delete_data=False):
     """
     if new_attr_vals:
         try:
-            for key, val in new_attr_vals.iteritems():
+            for key, val in new_attr_vals.items():
                 json_struct = update_json_struct_from_path(json_struct, key, val, delete_data=delete_data)
         except AttributeError:
             pass

@@ -1,6 +1,7 @@
 """Module which provides some base level python utilities such as the ability to make any arbitrary class Immutable
 through the ImmutableMixin
 """
+# stdlib
 import threading
 
 _immutable_delay_locals = threading.local()  # pylint: disable=invalid-name

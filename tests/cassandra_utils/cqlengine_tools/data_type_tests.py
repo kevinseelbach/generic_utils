@@ -1,6 +1,9 @@
-from cassandra.cqlengine import models, columns
-from generic_utils.cassandra_utils.cqlengine_tools.data_type import override_core_response_datatype, \
-    DATETYPE_TYPE_CODE, TimezoneAwareDateType
+from cassandra.cqlengine import columns
+from cassandra.cqlengine import models
+
+from generic_utils.cassandra_utils.cqlengine_tools.data_type import DATETYPE_TYPE_CODE
+from generic_utils.cassandra_utils.cqlengine_tools.data_type import TimezoneAwareDateType
+from generic_utils.cassandra_utils.cqlengine_tools.data_type import override_core_response_datatype
 from generic_utils.cassandra_utils.cqlengine_tools.test_utils import CassandraTestCaseMixin
 from generic_utils.datetimetools import utcnow
 from generic_utils.test import TestCase

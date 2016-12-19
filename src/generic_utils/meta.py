@@ -1,3 +1,7 @@
+# future/compat
+from future.utils import with_metaclass
+
+# stdlib
 import inspect
 
 
@@ -6,9 +10,9 @@ class MetaClass(type):
         try:
             frame = inspect.currentframe()
             frame = frame.f_back
-            if frame.f_locals.has_key(classname):
+            if classname in frame.f_locals:
                 old_class = frame.f_locals.get(classname)
-                for name, func in classdict.items():
+                for name, func in list(classdict.items()):
                     if inspect.isfunction(func):
                         setattr(old_class, name, func)
                 return old_class
@@ -17,5 +21,5 @@ class MetaClass(type):
             del frame
 
 
-class MetaObject(object):
-    __metaclass__ = MetaClass
+class MetaObject(with_metaclass(MetaClass, object)):
+    pass

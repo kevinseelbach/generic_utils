@@ -1,12 +1,14 @@
 """Tests for generic_utils.collections.pipeline"""
+# stdlib
 from unittest import TestCase
+
 from nose.tools import nottest
 
-from generic_utils.collections.pipeline import Pipeline
-from generic_utils.collections.exceptions import InvalidStageException, PipelineSuccessExit, PipelineErrorExit
-
 from generic_utils import loggingtools
-
+from generic_utils.collections.exceptions import InvalidStageException
+from generic_utils.collections.exceptions import PipelineErrorExit
+from generic_utils.collections.exceptions import PipelineSuccessExit
+from generic_utils.collections.pipeline import Pipeline
 
 LOG = loggingtools.getLogger()
 
@@ -84,7 +86,7 @@ class PipelineTestCase(TestCase):
             c: None,
             d: InvalidStageException
         }
-        for stage_func, expectation in EXPECTATION_MAP.iteritems():
+        for stage_func, expectation in EXPECTATION_MAP.items():
             if expectation is InvalidStageException:
                 with self.assertRaises(expectation):
                     self.pipeline._get_next_stage(stage_func)
@@ -128,13 +130,15 @@ class PipelineTestCase(TestCase):
             else:
                 return intermediate_result
 
-        err_exit = None
+        exit_err = None
         try:
             self._do_exit_condition_tests(test_filter, EXIT_RESULT)
-        except PipelineErrorExit as err_exit:
-            LOG.debug("Raised PipelineErrorExit as expected")
+        except PipelineErrorExit as err:
+            LOG.debug("Raised PipelineErrorExit as expected, %r", err)
+            exit_err = err
+        self.assertIsNotNone(exit_err)
+        self.assertEqual(EXIT_RESULT, exit_err.intermediate_result)
 
-        self.assertEqual(EXIT_RESULT, err_exit.intermediate_result)
         ### Validate the transition filter does not get called after the final stage.
         self._do_exit_condition_tests(test_filter, FULL_PIPELINE_RESULT_VAL, True)
 
@@ -169,5 +173,3 @@ class PipelineTestCase(TestCase):
         test_pipeline = Pipeline(stage_a, stage_b, stage_c, transition_filters=trans_filter)
         pipeline_result = test_pipeline.start(*pipeline_callargs)
         self.assertEqual(pipeline_result, expected_result)
-
-

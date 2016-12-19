@@ -1,8 +1,12 @@
 from __future__ import absolute_import
 
+# stdlib
 from unittest import TestCase
+
 from generic_utils import loggingtools
-from generic_utils.exceptions import GenUtilsException, GenUtilsValueError, IllegalArgumentException
+from generic_utils.exceptions import GenUtilsException
+from generic_utils.exceptions import GenUtilsValueError
+from generic_utils.exceptions import IllegalArgumentException
 
 log = loggingtools.getLogger()
 

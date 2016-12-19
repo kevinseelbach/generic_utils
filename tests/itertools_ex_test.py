@@ -1,10 +1,18 @@
+from __future__ import division
+
+# future/compat
+from builtins import range
+from past.utils import old_div
+
+# stdlib
 import logging
-import sys
-import types
-from inspect import getmembers
 from unittest import TestCase
 
-from generic_utils.itertools_ex import ibatch, iiterex, reverse_enumerate, index_of, IteratorProxy
+from generic_utils.itertools_ex import IteratorProxy
+from generic_utils.itertools_ex import ibatch
+from generic_utils.itertools_ex import iiterex
+from generic_utils.itertools_ex import index_of
+from generic_utils.itertools_ex import reverse_enumerate
 
 log = logging.getLogger(__name__)
 
@@ -52,7 +60,7 @@ class IteratorProxyTestCase(TestCase):
 
 class ReverseEnumerateTestCase(TestCase):
     def test_basic_usage(self):
-        my_list = [x for x in reversed(range(10))]
+        my_list = [x for x in reversed(list(range(10)))]
         expected_idx = len(my_list) - 1
         count = 0
 
@@ -131,7 +139,7 @@ class TestIIterEx(TestCase):
             self.assertEqual(item.b % 3, 0)
             count += 1
 
-        self.assertEqual(count, len(new_list) / 15)
+        self.assertEqual(count, old_div(len(new_list), 15))
 
     def test_wrapping_object_attr_in_interable(self):
         """ Validates and documents method for wrapping an object's attribute so that it becomes iterable.
@@ -214,7 +222,7 @@ class IndexOfTestCase(TestCase):
             ([{"a": 0}, {"a": 1}, {"a": 2}, {"a": 1}], lambda x: x["a"] == 3, None),
 
             # Validate it works with a generator as well
-            (xrange(3), lambda x: x == 1, 1),
+            (range(3), lambda x: x == 1, 1),
         ]
 
         self._do_index_of_test_cases(TEST_CASES, True)
@@ -252,4 +260,3 @@ class IndexOfTestCase(TestCase):
                     raise
 
             test_case_idx += 1
-

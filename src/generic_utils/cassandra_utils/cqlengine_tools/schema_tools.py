@@ -1,16 +1,21 @@
 """Various tools for working with the Cassandra schema
 """
-from importlib import import_module
+# future/compat
+from past.builtins import basestring
+
+# stdlib
 import inspect
+from importlib import import_module
+
 from cassandra import AlreadyExists
 from cassandra.cqlengine import connection as cql_connection
 from cassandra.cqlengine import management
-from cassandra.cqlengine.models import Model as cqlengine_Model
 from cassandra.cqlengine.connection import get_cluster
+from cassandra.cqlengine.models import Model as cqlengine_Model
 
 from generic_utils import loggingtools
-from generic_utils.typetools import as_iterable
 from generic_utils.cassandra_utils.cqlengine_tools.connection import setup_connection_from_config
+from generic_utils.typetools import as_iterable
 
 log = loggingtools.getLogger()
 
@@ -89,7 +94,7 @@ def discover_models_from_packages(packages):
             module = import_module(module_name)
             log.debug("Cassandra models module defined for package %s", pkg)
             new_models = discover_models_from_module(module)
-            for keyspace, ks_models in new_models.items():
+            for keyspace, ks_models in list(new_models.items()):
                 keyspace_models = models.setdefault(keyspace, [])
                 keyspace_models.extend(ks_models)
         except ImportError:

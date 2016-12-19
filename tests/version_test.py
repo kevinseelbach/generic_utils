@@ -1,11 +1,20 @@
+# future/compat
+from builtins import range
+from builtins import str
+from builtins import zip
+
+# stdlib
+import hashlib
 import inspect
 import os
 import pickle
 import random
-import hashlib
 from unittest import TestCase
-from generic_utils import versioninfo, loggingtools
-from generic_utils.versioninfo import Version, GuidMixin
+
+from generic_utils import loggingtools
+from generic_utils import versioninfo
+from generic_utils.versioninfo import GuidMixin
+from generic_utils.versioninfo import Version
 
 log = loggingtools.getLogger()
 
@@ -56,7 +65,7 @@ class TestVersion(TestCase):
         self.assertVersionsEqual(v.get_future_version(release=1),
                                  Version(major=0, year=12, week=52, patch=0))
         self.assertVersionsEqual(v.get_future_version(release=2),
-                                 Version(major=0, year=13, week=01, patch=0))
+                                 Version(major=0, year=13, week=0o1, patch=0))
 
     def test_future_version_on_53_week_rollover(self):
         """Validates that on a year where the final release_day_of_week falls on the 53rd week that when we increment
@@ -67,7 +76,7 @@ class TestVersion(TestCase):
         self.assertVersionsEqual(v.get_future_version(release=1),
                                  Version(major=0, year=15, week=53, patch=0))
         self.assertVersionsEqual(v.get_future_version(release=2),
-                                 Version(major=0, year=16, week=01, patch=0))
+                                 Version(major=0, year=16, week=0o1, patch=0))
 
     def test_version_compare(self):
         """Validates that all comparisons for a Version work as expected.  This includes a Version to Version comparison
@@ -89,7 +98,7 @@ class TestVersion(TestCase):
             log.debug("Testing version component '%s'", tested_comp)
             fuzzy_comps = VERSION_COMPONENTS[i+1:]
             fixed_kwargs = {}
-            fixed_kwargs.update(dict(zip(VERSION_COMPONENTS, [FIXED_VAL] * len(VERSION_COMPONENTS))))
+            fixed_kwargs.update(dict(list(zip(VERSION_COMPONENTS, [FIXED_VAL] * len(VERSION_COMPONENTS)))))
             a = Version(**fixed_kwargs)
             b = Version(**fixed_kwargs)
 

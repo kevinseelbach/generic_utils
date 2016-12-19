@@ -1,9 +1,10 @@
+# stdlib
 from unittest import TestCase
+
 from generic_utils import loggingtools
 from generic_utils.datetimetools import utcnow
 from generic_utils.json_tools import serialization
 from generic_utils.test.datetime_utils import EST
-
 
 log = loggingtools.getLogger()
 
@@ -79,4 +80,3 @@ class BidirectionalSerializationTestCase(TestCase):
 
         ### VALIDATION
         self.assertEqual(obj_instance, deserialized)
-

@@ -13,8 +13,11 @@ general documentation and upkeep, but has been used successfully in production
 environments within the prescribed environments.
 
 """
-from __future__ import absolute_import, print_function
+# future/compat
+from __future__ import absolute_import
+from __future__ import print_function
 
+# stdlib
 import io
 import os
 import re
@@ -110,6 +113,7 @@ setup(
     },
     install_requires=[
         'setuptools',
-        'six'
+        'six',
+        'future',
     ]
 )

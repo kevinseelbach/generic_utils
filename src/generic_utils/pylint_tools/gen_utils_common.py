@@ -1,16 +1,20 @@
 """Tools to improve pylint introspection"""
+# stdlib
 import os
 import re
+
 # These imports are *sort-of* dangerous in that python-utils does not declare a dependency on any of these, but since
 # this specific package and modules are only meant to be run within pylint we are assuming that the pylint environment
 # is setup as expected which includes pylint_django and pylint_plugin_utils.  The more appropriate way to do this is
 # to create a whole new pylint plugin python package, but the need is not quite there yet.
 from astroid import MANAGER
+from astroid import InferenceError
+from astroid import nodes
 from astroid.builder import AstroidBuilder
-from astroid import nodes, InferenceError
 from pylint.checkers.typecheck import TypeChecker
 from pylint_django.utils import node_is_subclass
 from pylint_plugin_utils import augment_visit
+
 from . import augmentations
 
 
@@ -75,4 +79,3 @@ def register(linter):
     """Hook for doing various registrations with pylint for additional functionality."""
     augment_visit(linter, TypeChecker.visit_attribute, factory_dynamic_attributes)
     augmentations.apply_augmentations(linter)
-

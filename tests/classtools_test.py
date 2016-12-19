@@ -1,9 +1,15 @@
+# stdlib
 import logging
 import types
 from unittest import TestCase
+
 from mock import patch
-from generic_utils.classtools import get_classfqn, get_class_from_fqn, get_instance_from_fqn, get_from_fqn, \
-    get_class_attributes
+
+from generic_utils.classtools import get_class_attributes
+from generic_utils.classtools import get_class_from_fqn
+from generic_utils.classtools import get_classfqn
+from generic_utils.classtools import get_from_fqn
+from generic_utils.classtools import get_instance_from_fqn
 
 log = logging.getLogger(__name__)
 
@@ -112,4 +118,3 @@ class GetClassAttributesTestCase(TestCase):
         class_attrs = get_class_attributes(ChildClass)
 
         self.assertDictEqual(class_attrs, EXPECTED_ATTRS)
-

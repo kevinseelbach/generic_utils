@@ -20,7 +20,8 @@ attribute.  In order to run all tests but exclude the "slow" tests you could the
 
 """
 from generic_utils.decorator_tools import decorator
-from generic_utils.test.nose_utils import get_attrib_decorated_func, specialize_attr_decorator
+from generic_utils.test.nose_utils import get_attrib_decorated_func
+from generic_utils.test.nose_utils import specialize_attr_decorator
 
 TEST_CATEGORY_ATTR_NAME = "category"
 

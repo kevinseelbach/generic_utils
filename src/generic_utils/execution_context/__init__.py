@@ -1,13 +1,17 @@
 """Classes to define ExecutionContext concepts which contain any special configuration / context data needed at runtime
 """
+# stdlib
 import copy
-import threading
 
-from generic_utils import loggingtools, NOTSET
+from generic_utils import NOTSET
+from generic_utils import loggingtools
+from generic_utils import threads
 from generic_utils.contextlib_ex import ExplicitContextDecorator
-from generic_utils.exceptions import GenUtilsValueError, GenUtilsTypeError, GenUtilsAttributeError
-from generic_utils.execution_context.exceptions import ExecutionContextValueDoesNotExist, \
-    ExecutionContextStackEmptyError
+from generic_utils.exceptions import GenUtilsAttributeError
+from generic_utils.exceptions import GenUtilsTypeError
+from generic_utils.exceptions import GenUtilsValueError
+from generic_utils.execution_context.exceptions import ExecutionContextStackEmptyError
+from generic_utils.execution_context.exceptions import ExecutionContextValueDoesNotExist
 from generic_utils.typetools import as_iterable
 
 LOG = loggingtools.getLogger()
@@ -98,11 +102,11 @@ class BaseExecutionContext(object):
         :return: A deep clone of the original object
         :rtype: BaseExecutionContext
         """
-        LOG.debug("Begin copying object of type=%s", self.__class__)
+        LOG.debug("Begin copying object of type=%s memo=%r", self.__class__, memo)
         cls = self.__class__
         result = cls.__new__(cls)
         memo[id(self)] = result
-        for key, value in self.__dict__.iteritems():
+        for key, value in self.__dict__.items():
             setattr(result, key, copy.deepcopy(value, memo))
         LOG.debug("Successful deep copy, returning instance copy.")
         return result
@@ -120,7 +124,7 @@ class ThreadLocalExecutionContext(BaseExecutionContext):
         :param initial_context:
         :type initial_context:
         """
-        self._thread_local = threading.local()
+        self._thread_local = threads.copyable_local()
         super(ThreadLocalExecutionContext, self).__init__(initial_context)
         if initial_context is not None and isinstance(initial_context, dict):
             # noinspection PyArgumentList
@@ -134,6 +138,7 @@ class ThreadLocalExecutionContext(BaseExecutionContext):
         :return:
         :rtype: dict
         """
+        LOG.debug("Getstate called")
         return dict(self._thread_local.__dict__)
 
     def __setstate__(self, state):
@@ -142,7 +147,8 @@ class ThreadLocalExecutionContext(BaseExecutionContext):
         :return:
         :rtype: None
         """
-        self._thread_local = threading.local()
+        LOG.debug("Setstate called %r", state)
+        self._thread_local = threads.copyable_local()
         self._thread_local.__dict__.update(state)
 
     def clear(self):
@@ -218,7 +224,7 @@ class ExecutionContextStack(BaseExecutionContext):
         :return:
         :rtype:
         """
-        self._thread_local = threading.local()
+        self._thread_local = threads.copyable_local()
         super(ExecutionContextStack, self).__init__(initial_context)
         LOG.debug("_on_init handling _initial_context=%r passed to ExecutionContextStack", initial_context)
         if initial_context is not None:
@@ -251,7 +257,7 @@ class ExecutionContextStack(BaseExecutionContext):
         :return:
         :rtype:
         """
-        self._thread_local = threading.local()
+        self._thread_local = threads.copyable_local()
         self._thread_local.__dict__.update(state)
 
     @property

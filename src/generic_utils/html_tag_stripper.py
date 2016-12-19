@@ -30,4 +30,3 @@ def strip_tags(html):
     # According to http://www.crummy.com/software/BeautifulSoup/bs4/doc/#entities
     # BeautifulSoup4 produces proper Unicode for all entities, meaning '&nbsp;' is converted to u'\xa0'.
     return soup.get_text().replace(u"\xa0", " ").replace("\n", "")
-

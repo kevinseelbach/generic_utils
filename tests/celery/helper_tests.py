@@ -1,11 +1,12 @@
 """ Test settings functions
 """
+# stdlib
 import os
-
-from generic_utils.loggingtools import getLogger
-from generic_utils.celery import get_broker_url, BrokerTypes
-
 from unittest import TestCase
+
+from generic_utils.celery import BrokerTypes
+from generic_utils.celery import get_broker_url
+from generic_utils.loggingtools import getLogger
 
 LOG = getLogger()
 
@@ -55,4 +56,3 @@ class BaseSettingsTests(TestCase):
         broker_url = get_broker_url("TEST_CELERY")
 
         self.assertEqual(broker_url, "amqp://someusername:somepassword@somehost:889//")
-

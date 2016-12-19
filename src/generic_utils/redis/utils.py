@@ -1,8 +1,12 @@
 """
 Utilities for redis
 """
-from generic_utils.config import get_config_value
+# future/compat
+from builtins import str
+
 from redis.client import StrictRedis
+
+from generic_utils.config import get_config_value
 
 DEFAULT_URL_PATTERN = "redis://{user_info}{host}:{port}/{db}"
 USER_PATTERN = "{username}{password}@"

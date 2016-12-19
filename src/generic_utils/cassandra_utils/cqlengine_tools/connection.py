@@ -3,8 +3,9 @@
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import NoHostAvailable  # pylint: disable=no-name-in-module
 from cassandra.cqlengine import connection as cqlengine_connection
-from cassandra.cqlengine.connection import get_session
 from cassandra.cqlengine import CQLEngineException
+from cassandra.cqlengine.connection import get_session
+
 from generic_utils import loggingtools
 from generic_utils.config import config
 

@@ -1,7 +1,10 @@
+# stdlib
+from unittest import TestCase
+
+from mock import patch
+
 from generic_utils import loggingtools
 from generic_utils.test.mock.tools import SpyObject
-from mock import patch
-from unittest import TestCase
 
 explicit_log = loggingtools.getLogger(__name__)
 implicit_log = loggingtools.getLogger()

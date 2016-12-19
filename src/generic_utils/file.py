@@ -1,6 +1,7 @@
 """
 Various file utilities
 """
+# stdlib
 import os
 import re
 
@@ -93,4 +94,3 @@ def get_file_list(root_dir,
                 return_list.append(relpath)
 
     return return_list
-

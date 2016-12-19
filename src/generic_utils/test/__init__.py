@@ -1,11 +1,19 @@
 """Utilities for writing tests
 """
-import threading
+# future/compat
+import six
+from builtins import str
+from future.utils import with_metaclass
 
-import unittest
-import new
-from unittest.case import expectedFailure
+# stdlib
+import threading
 import types
+import unittest
+
+from nose.plugins import attrib
+from nose.tools import nottest
+
+from generic_utils import five
 from generic_utils import loggingtools
 
 try:
@@ -23,8 +31,6 @@ except ImportError:
         raise RuntimeError("In order to use the data decorator you must install python-utils with the "
                            "'test_utils' extras package; eg python-utils['test_utils']")
 
-from nose.plugins import attrib
-from nose.tools import nottest
 
 JIRA_ATTR_NAME = "jira"
 
@@ -84,8 +90,6 @@ def jira(*args, **kwargs):
             if skip_val:
                 func = unittest.skip("Jira(s) %s are not resolved yet" % str(args))(func)
             else:
-                # Currently nose does not support expected failures, but we use it anyway in hopes PYUTILS-2 will be
-                # fixed
                 func = unittest.expectedFailure(func)
 
         attr_wrapped = attrib.attr(**attrs)
@@ -95,6 +99,7 @@ def jira(*args, **kwargs):
 
 _TEST_GENERATOR_PARAMS_ATTR = "_TEST_GENERATOR_PARAMS_ATTR"
 _BAD_DATA_ATTR = "_BAD_DATA_ATTR"
+
 
 class TestCaseMixinMetaClass(type):
     """Meta class for the base TestCase which provides core hooks and test case modifications which are beneficial
@@ -142,8 +147,13 @@ class TestCaseMixinMetaClass(type):
                 cls._thread_locals.__delattr__("current_test")
 
             # pylint: disable=attribute-defined-outside-init, invalid-name
-            cls.setUp = new.instancemethod(cb_wrapped_setUp, None, cls)
-            cls.tearDown = new.instancemethod(cb_wrapped_tearDown, None, cls)
+            if six.PY2:
+                import new
+                cls.setUp = new.instancemethod(cb_wrapped_setUp, None, cls)
+                cls.tearDown = new.instancemethod(cb_wrapped_tearDown, None, cls)
+            else:
+                cls.setUp = cb_wrapped_setUp
+                cls.tearDown = cb_wrapped_tearDown
 
             cls._core_test_methods_overridden = True
 
@@ -199,7 +209,7 @@ class TestCaseMixinMetaClass(type):
     def _expand_bad_data_tests(cls, name, member, bd_arg_list):
         """Processes bad_data test generator information to generate new tests
         """
-        exp_failure_method = expectedFailure(member)
+        exp_failure_method = five.expectedFailure(member)
         idx = 0
         for bd_args, bd_kwargs in bd_arg_list:
             unpack = bd_kwargs.get("unpack", False) or hasattr(member, UNPACK_ATTR)
@@ -236,12 +246,11 @@ class TestCaseMixinMetaClass(type):
                 add_test(cls, test_name, test_func)
 
 
-class TestCase(unittest.TestCase):
+class TestCase(with_metaclass(TestCaseMixinMetaClass, unittest.TestCase)):
     """
     Base TestCase class which applies behavior provided by TestCaseMixinMetaClass.
         See docstring of TestCaseMixinMetaClass for more details.
     """
-    __metaclass__ = TestCaseMixinMetaClass
 
     def _custom_setup(self):  # pylint: disable=invalid-name
         """Setup method that should be overridden by utility TestCase subclasses instead of the core test setUp method.

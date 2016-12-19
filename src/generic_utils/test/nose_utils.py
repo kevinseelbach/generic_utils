@@ -1,6 +1,7 @@
 """Module which provides various utilities for wrapping and dealing with the Nose functionality
 """
 from nose.plugins import attrib
+
 from generic_utils.decorator_tools import decorator
 
 

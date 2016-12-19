@@ -2,9 +2,12 @@
 python.  This is interesting because some of the data types in python are not directly supported in JSON so while you
 can generate a JSON representation there is no going back.
 """
-import json
+# stdlib
 import datetime
-from generic_utils.classtools import get_classfqn, get_class_from_fqn
+import json
+
+from generic_utils.classtools import get_class_from_fqn
+from generic_utils.classtools import get_classfqn
 from generic_utils.datetimetools import utc
 
 OBJ_TYPE_KEY = "__type__"
@@ -36,6 +39,7 @@ class JSONEncoder(json.JSONEncoder):
         except TypeError:
             if hasattr(obj, "__getstate__"):
                 obj_value = obj.__getstate__()
+                print("Object-value = %r" % obj_value)
             else:
                 obj_value = obj.__dict__
             return {

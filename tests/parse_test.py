@@ -1,7 +1,9 @@
+# stdlib
 import logging
 from unittest import TestCase
 
-from generic_utils.parse import split_by_size, versiontuple
+from generic_utils.parse import split_by_size
+from generic_utils.parse import versiontuple
 
 log = logging.getLogger(__name__)
 
@@ -65,4 +67,3 @@ class VersiontupleTestCase(TestCase):
     def test_raises_value_error(self):
         bad_version = "1.6.final.2"
         self.assertRaises(ValueError, versiontuple, bad_version)
-

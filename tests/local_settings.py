@@ -2,8 +2,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
-from future import standard_library
-standard_library.install_aliases()
 
 from generic_utils.cassandra_utils.cqlengine_tools.connection import ConfigKey
 from generic_utils.config import get_config_value
@@ -20,4 +18,3 @@ CQLENGINE = {
         ConfigKey.DEFAULT_TIMEOUT: EXPLICTLY_NOT_10_SECONDS_TIMEOUT
     }
 }
-

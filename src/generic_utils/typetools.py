@@ -1,5 +1,9 @@
 from __future__ import absolute_import
+
+# future/compat
 import six
+
+# stdlib
 import collections
 
 

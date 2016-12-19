@@ -1,5 +1,5 @@
-from . import django_rest_framework
 from . import django
+from . import django_rest_framework
 
 
 def apply_augmentations(linter):

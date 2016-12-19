@@ -1,20 +1,24 @@
 """Module which provides tools for dealing with logging configuration, primarily with providing log configuration at
 runtime from any provider backend.
 """
-from collections import namedtuple
+# stdlib
 import logging
-from . import getLogger
 import threading
+from collections import namedtuple
+
 from generic_utils import NOTSET
 from generic_utils.classtools import get_instance_from_fqn
 from generic_utils.config import config
 from generic_utils.datetimetools import utcnow
+from generic_utils.mixins import comparable
 from generic_utils.typetools import as_iterable
+
+from . import getLogger
 
 LOG = getLogger()
 
 
-class LevelOverride(object):
+class LevelOverride(comparable.ComparableMixin):
     """Definition of a level override which can be applied to a log level dynamically to override the log level for a
     logger within a given scope/time frame.
     """
@@ -53,8 +57,11 @@ class LevelOverride(object):
             return logging.NOTSET
         return self._level
 
-    def __cmp__(self, other):
-        """Comparisons, such as "greater than", for a Level Override is determined not by level but by which is most
+    def _cmpkey(self):
+        """Logging constants are in reverse order, i.e. 10-Debug, 20-info, etc. Do some basic math to make this work
+        with Comparable ordering mixin.
+
+        Comparisons, such as "greater than", for a Level Override is determined not by level but by which is most
         specific and valid.  For instance a level override which is not expired will always be greater than one which
         is expired and an override with a lower log level will be greater than one with a bigger level because a lower
         level has higher override precedence than a higher log level since it is more permissive
@@ -62,24 +69,11 @@ class LevelOverride(object):
         """
         # A level of NOTSET is ignored and the operand is disqualified from comparisons unless both are NOTSET in which
         # case they are considered equal
-        my_level = self.level
-        try:
-            other_level = other.level
-        except AttributeError:
-            other_level = logging.NOTSET
-
-        if my_level is logging.NOTSET:
-            return 0 if other_level is logging.NOTSET else -1
+        base_level = self.level
+        if base_level is logging.NOTSET:
+            return -100
         else:
-            if other_level is logging.NOTSET:
-                return 1
-
-            if my_level == other_level:
-                return 0
-            elif my_level > other_level:
-                return -1
-            else:
-                return 1
+            return -1 * base_level
 
 
 class LogLevelProvider(object):
@@ -274,7 +268,7 @@ class LogLevelProviderCollection(LogLevelProvider):
             self._refresh_last_update_datetime(provider)
             if not prov_overrides:
                 continue
-            for logger_name, override in prov_overrides.iteritems():
+            for logger_name, override in prov_overrides.items():
                 if logger_name not in overrides or override > overrides[logger_name]:
                     overrides[logger_name] = override
 
@@ -301,7 +295,7 @@ class InMemoryLogLevelProvider(LogLevelProvider):
     def remove_all_overrides(self):
         """Removes all applied overrides
         """
-        self.remove_overrides(self._overrides.keys())
+        self.remove_overrides(list(self._overrides.keys()))
         LOG.debug("All overrides removed")
 
     def remove_overrides(self, *logger_names):
@@ -350,7 +344,7 @@ class InMemoryLogLevelProvider(LogLevelProvider):
             self._modification_lock.acquire()
             current_overrides = self.get_overrides()
             new_overrides = {}
-            for logger_name, level_override in overrides_dict.iteritems():
+            for logger_name, level_override in overrides_dict.items():
                 if isinstance(level_override, int):
                     # Convert a raw level to a LevelOverride as a convenience
                     level_override = LevelOverride(level_override)
@@ -359,7 +353,7 @@ class InMemoryLogLevelProvider(LogLevelProvider):
                     continue  # Nothing new
                 new_overrides[logger_name] = level_override
 
-            for logger_name, level_override in new_overrides.iteritems():
+            for logger_name, level_override in new_overrides.items():
                 if level_override.expiration_date is NOTSET:
                     level_override.expiration_date = expiration_date
 

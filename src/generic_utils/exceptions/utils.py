@@ -1,8 +1,13 @@
 """Utilities for working with Exceptions"""
-from generic_utils.classtools import get_class_from_fqn, cached_property
+# future/compat
+from builtins import next
+
+# stdlib
+from generic_utils import loggingtools
+from generic_utils.classtools import cached_property
+from generic_utils.classtools import get_class_from_fqn
 from generic_utils.config import config
 from generic_utils.contextlib_ex import ExplicitContextDecorator
-from generic_utils import loggingtools
 
 LOG = loggingtools.getLogger()
 

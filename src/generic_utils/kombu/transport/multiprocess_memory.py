@@ -35,17 +35,30 @@ NOTE:  This is not thread safe such that you cannot run multiple tests in parall
     of this do not protect itself and leverages global state.  This is thread safe internally in its management of its
     internal responsibilities and as a Kombu service.
 """
-import os
-import sys
-import signal
-from multiprocessing.managers import SyncManager, DictProxy, ListProxy, RemoteError
-from multiprocessing import Process
+from __future__ import print_function
+
+# future/compat
+from builtins import str
+
+# stdlib
 import multiprocessing
+import os
+import signal
+import sys
+
+from multiprocessing import Process
+from multiprocessing.managers import DictProxy
+from multiprocessing.managers import ListProxy
+from multiprocessing.managers import RemoteError
+from multiprocessing.managers import SyncManager
+
 from kombu.exceptions import InconsistencyError
 from kombu.transport import TRANSPORT_ALIASES
-from kombu.transport.memory import Channel as MemoryChannel, Transport as MemoryTransport
+from kombu.transport.memory import Channel as MemoryChannel
+from kombu.transport.memory import Transport as MemoryTransport
 from kombu.transport.redis import NO_ROUTE_ERROR
 from kombu.utils.encoding import bytes_to_str
+
 from generic_utils import loggingtools
 
 # pylint: disable=global-statement
@@ -229,10 +242,10 @@ class Channel(MemoryChannel):  # pylint: disable=abstract-method
 
     def _has_queue(self, queue, **kwargs):
         _debug("has_queue %s" % queue)
-        return self.queues.has_key(queue)
+        return queue in self.queues
 
     def _new_queue(self, queue, **kwargs):
-        if not self.queues.has_key(queue):
+        if queue not in self.queues:
             _debug("Created new channel %s" % queue)
             self._create_new_queue(queue)
         else:
@@ -345,4 +358,4 @@ def _debug(msg):
     """
     if _ENABLE_HACKY_DEBUG:
         # Print because logging doesn't work with multi-processes to a file
-        print "(%s) - %s" % (str(os.getpid()), msg)
+        print("(%s) - %s" % (str(os.getpid()), msg))

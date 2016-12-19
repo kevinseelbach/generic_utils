@@ -1,7 +1,13 @@
 """Generic pipeline."""
-from generic_utils.collections.exceptions import InvalidStageException, PipelineException, PipelineSuccessExit, \
-    PipelineErrorExit
+# stdlib
+from builtins import object
+from builtins import range
+
 from generic_utils import loggingtools
+from generic_utils.collections.exceptions import InvalidStageException
+from generic_utils.collections.exceptions import PipelineErrorExit
+from generic_utils.collections.exceptions import PipelineException
+from generic_utils.collections.exceptions import PipelineSuccessExit
 from generic_utils.typetools import as_iterable
 
 LOG = loggingtools.getLogger()
@@ -52,7 +58,7 @@ class Pipeline(object):
         """
         intermediate_result = None
         num_of_stage_funcs = len(self)
-        for idx in xrange(num_of_stage_funcs):
+        for idx in range(num_of_stage_funcs):
             func = self._stage_functions[idx]
             if idx == 0:
                 intermediate_result = func(*args, **kwargs)
@@ -63,7 +69,7 @@ class Pipeline(object):
                 try:
                     should_continue, intermediate_result = self._execute_transition_filters(func, intermediate_result)
                 except PipelineErrorExit as error_exit:
-                    LOG.debug("Exiting pipeline early due to transition function raising %s", error_exit)
+                    LOG.debug("Exiting pipeline early due to transition function raising Error=%r", error_exit)
                     raise
 
                 if should_continue is not True:

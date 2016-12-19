@@ -1,12 +1,15 @@
+# stdlib
 import datetime
 import logging
+
 from freezegun import freeze_time
+
 from generic_utils import loggingtools
 from generic_utils.datetimetools import utcnow
-from generic_utils.loggingtools.loggingconfig import InMemoryLogLevelProvider, LevelOverride, \
-    LogLevelProviderCollection
+from generic_utils.loggingtools.loggingconfig import InMemoryLogLevelProvider
+from generic_utils.loggingtools.loggingconfig import LevelOverride
+from generic_utils.loggingtools.loggingconfig import LogLevelProviderCollection
 from generic_utils.test import TestCase
-
 
 LOG = loggingtools.getLogger()
 
@@ -24,7 +27,7 @@ class LevelOverrideComparisonTestCases(TestCase):
 
         ### EXECUTION
         for left, right in TEST_CASES:
-            self.assertTrue(left > right)
+            self.assertTrue(left > right, "%r should be > %r" % (left.level, right.level))
             self.assertTrue(left != right)
             self.assertFalse(left == right)
             self.assertFalse(left < right)

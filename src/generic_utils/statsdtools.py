@@ -6,11 +6,14 @@ environment
 """
 from __future__ import absolute_import
 
+# stdlib
+import socket
 from collections import defaultdict
 from time import time
-import socket
+
 from generic_utils import loggingtools
 from generic_utils.config import config
+
 try:
     from statsd.client import StatsClient
 except ImportError:

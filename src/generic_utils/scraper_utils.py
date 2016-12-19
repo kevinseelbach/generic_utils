@@ -1,12 +1,17 @@
 """Module for common web-scraping helper functions / class
 """
+# future/compat
+from builtins import object
+from past.builtins import basestring
+
+import requests
 from bs4 import UnicodeDammit
 from lxml import html
 from lxml.html.clean import Cleaner
-import requests
-from generic_utils import loggingtools
-from .requests_utils import SSLAdapter
 
+from generic_utils import loggingtools
+
+from .requests_utils import SSLAdapter
 
 log = loggingtools.getLogger()
 

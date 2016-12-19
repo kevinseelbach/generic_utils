@@ -1,11 +1,12 @@
 """Various core python logging handlers
 """
 from __future__ import absolute_import
-
-from logging.handlers import RotatingFileHandler
+# stdlib
 import codecs
-from logging import FileHandler, Formatter
 from logging import StreamHandler as py_StreamHandler
+from logging import FileHandler
+from logging import Formatter
+from logging.handlers import RotatingFileHandler
 
 
 class NoBufferingFileHandlerMixin(object):
