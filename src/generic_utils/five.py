@@ -1,10 +1,13 @@
 """Additional 2/3 compatibility helpers"""
-import six
 import codecs
+import unittest
 
+import functools
+
+
+import six
 
 if six.PY2:
-
     def bytes_if_py2(val):
         """Convert str to bytes if running under Python 2."""
         if isinstance(val, unicode):
@@ -16,7 +19,12 @@ if six.PY2:
 
     def u(x):
         return codecs.unicode_escape_decode(x)[0]
+
+    expectedFailure = unittest.expectedFailure
 else:
+    # Python > 2.7 imports
+    from unittest.case import _AssertRaisesContext
+
     def bytes_if_py2(val):
         """Convert str to bytes if running under Python 2."""
         return val
@@ -27,3 +35,13 @@ else:
     def b(x):
         return codecs.latin_1_encode(x)[0]
 
+    def expectedFailure(func):
+        """Pythons > 2.7 implement expectedFailure by setting `func.__unittest_expecting_failure__ = True`
+            re-implementing wrapper here to do the assertRaises() behavior
+        """
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            context = _AssertRaisesContext(Exception, func)
+            with context:
+                func(*args, **kwargs)
+        return wrapper

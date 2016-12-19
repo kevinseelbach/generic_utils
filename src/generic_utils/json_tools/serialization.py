@@ -36,6 +36,7 @@ class JSONEncoder(json.JSONEncoder):
         except TypeError:
             if hasattr(obj, "__getstate__"):
                 obj_value = obj.__getstate__()
+                print("Object-value = %r" % obj_value)
             else:
                 obj_value = obj.__dict__
             return {

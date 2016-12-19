@@ -8,6 +8,8 @@ import unittest
 import types
 
 from unittest.case import expectedFailure
+
+from generic_utils import five
 from generic_utils import loggingtools
 from future.utils import with_metaclass
 
@@ -87,8 +89,6 @@ def jira(*args, **kwargs):
             if skip_val:
                 func = unittest.skip("Jira(s) %s are not resolved yet" % str(args))(func)
             else:
-                # Currently nose does not support expected failures, but we use it anyway in hopes PYUTILS-2 will be
-                # fixed
                 func = unittest.expectedFailure(func)
 
         attr_wrapped = attrib.attr(**attrs)
@@ -98,6 +98,7 @@ def jira(*args, **kwargs):
 
 _TEST_GENERATOR_PARAMS_ATTR = "_TEST_GENERATOR_PARAMS_ATTR"
 _BAD_DATA_ATTR = "_BAD_DATA_ATTR"
+
 
 class TestCaseMixinMetaClass(type):
     """Meta class for the base TestCase which provides core hooks and test case modifications which are beneficial
@@ -207,7 +208,7 @@ class TestCaseMixinMetaClass(type):
     def _expand_bad_data_tests(cls, name, member, bd_arg_list):
         """Processes bad_data test generator information to generate new tests
         """
-        exp_failure_method = expectedFailure(member)
+        exp_failure_method = five.expectedFailure(member)
         idx = 0
         for bd_args, bd_kwargs in bd_arg_list:
             unpack = bd_kwargs.get("unpack", False) or hasattr(member, UNPACK_ATTR)

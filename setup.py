@@ -110,6 +110,7 @@ setup(
     },
     install_requires=[
         'setuptools',
-        'six'
+        'six',
+        'future',
     ]
 )

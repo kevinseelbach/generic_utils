@@ -211,18 +211,19 @@ class ExecutionContextTestCase(TestCase):
                 execution_context_stack.get(key)
 
         context_json = dumps(local_exec_stack)
-        local_exec_stack = None
+        del local_exec_stack
+
+        LOG.debug("Context JSON = %s", context_json)
         restored_stack = loads(context_json)
 
-        BEGIN_STACK_LENGTH = len(execution_context_stack)
+        begin_stack_length = len(execution_context_stack)
 
         with as_execution_context(restored_stack):   # test pushing this stack onto global stack temporarily
             self.assertEqual(execution_context_stack.get(context_a_key), "context_a")
             self.assertEqual(execution_context_stack.get(context_b_key), "context_b")
             self.assertEqual(execution_context_stack.get(test_first_key), test_first_val)
-        END_STACK_LENGTH = len(execution_context_stack)
-        self.assertEqual(BEGIN_STACK_LENGTH, END_STACK_LENGTH)
-
+        end_stack_length = len(execution_context_stack)
+        self.assertEqual(begin_stack_length, end_stack_length)
         for key in (context_a_key, context_b_key):
             with self.assertRaises(ExecutionContextValueDoesNotExist):
                 execution_context_stack.get(key)

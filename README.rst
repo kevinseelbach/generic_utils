@@ -95,10 +95,7 @@ Run the test suite::
 
     nosetests tests
 
+Or, using tox::
 
-TODO
-====
-
-- Add Dockerfiles for development
-- Python 3.5 compat
+    tox
 
