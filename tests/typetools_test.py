@@ -1,6 +1,3 @@
-# future/compat
-from builtins import range
-
 # stdlib
 from unittest import TestCase
 

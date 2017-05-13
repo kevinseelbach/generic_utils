@@ -60,7 +60,6 @@ setup(
     url='https://github.com/kevinseelbach/generic_utils',
     packages=find_packages('src'),
     package_dir={'': 'src'},
-    #py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     package_data={'generic_utils.pylint_tools': ['transforms/**']},
     include_package_data=True,
     zip_safe=False,
@@ -76,10 +75,6 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
-        # uncomment if you test on these interpreters:
-        # 'Programming Language :: Python :: Implementation :: IronPython',
-        # 'Programming Language :: Python :: Implementation :: Jython',
-        # 'Programming Language :: Python :: Implementation :: Stackless',
         'Topic :: Utilities',
     ],
     extras_require={
@@ -87,9 +82,6 @@ setup(
             'beautifulsoup4>=4.3.2',
             'requests',
             'lxml',
-        ],
-        'cassandra': [
-            'cassandra-driver'
         ],
         'celery_test': [
             'celery>=3.1.20',

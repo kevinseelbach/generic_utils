@@ -1,8 +1,5 @@
 """Various utilities for dealing with logging within tests
 """
-# future/compat
-from builtins import str
-
 # stdlib
 import logging
 import re

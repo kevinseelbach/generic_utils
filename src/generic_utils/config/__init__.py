@@ -2,11 +2,6 @@
 Generic configuration interface and module which allows for exposing environment/application configuration through a
 generic uniformly available interface
 """
-# future/compat
-from builtins import str
-from past.builtins import basestring
-
-# stdlib
 import ast
 import importlib
 import inspect
@@ -59,10 +54,10 @@ def get_config_value(property_name, default=None, secure=False, val_type=None):
                 if cast_option is dict:
                     val = ast.literal_eval(val)
                 elif cast_option is tuple or cast_option is list:
-                    if isinstance(val, basestring):
+                    if isinstance(val, str):
                         val = val.strip()
                     if val:
-                        if isinstance(val, basestring):
+                        if isinstance(val, str):
                             val = val.split(",")
                             val = [item.strip() for item in val]
                     else:
@@ -70,7 +65,7 @@ def get_config_value(property_name, default=None, secure=False, val_type=None):
 
                     if cast_option is tuple:
                         val = tuple(val)  # pylint: disable=redefined-variable-type
-                elif cast_option is bool and isinstance(val, basestring):
+                elif cast_option is bool and isinstance(val, str):
                     val = parse_bool(val)
                 else:
                     val = cast_option(val)

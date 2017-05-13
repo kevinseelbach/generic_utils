@@ -40,8 +40,6 @@ def stage_c(val):
     return val + STAGE_C_ADD_VAL
 
 
-
-
 @nottest
 def test_transition_filter(self, stage_func, intermediate_result):
     LOG.debug("Transition filter called on Pipeline=%r with stage_func=%r and intermediate_result=%r",
@@ -101,7 +99,7 @@ class PipelineTestCase(TestCase):
         def test_filter(pipeline_self, stage_func, intermediate_result):
             if stage_func == stage_b and intermediate_result == STAGE_B_ADD_VAL:
                 intermediate_result = int(intermediate_result)  # conversion of the result.
-                raise PipelineSuccessExit(pipeline_self, intermediate_result)
+                raise PipelineSuccessExit(pipeline=pipeline_self, intermediate_result=intermediate_result)
             elif stage_func == stage_b and intermediate_result == STAGE_B_CONTINUE_VAL:
                 LOG.debug("Continuing pipeline from stage_b with result = %s", intermediate_result)
                 return intermediate_result
@@ -121,11 +119,11 @@ class PipelineTestCase(TestCase):
 
         def test_filter(pipeline_self, stage_func, intermediate_result):
             if stage_func == stage_b and intermediate_result == STAGE_B_ADD_VAL:
-                ### Transformation of result.
+                # Transformation of result.
                 intermediate_result = EXIT_RESULT
-                raise PipelineErrorExit(pipeline_self, intermediate_result)
+                raise PipelineErrorExit(pipeline=pipeline_self, intermediate_result=intermediate_result)
             elif stage_func == stage_c:
-                ### Pipelines should never call transition with their final stage.
+                # Pipelines should never call transition with their final stage.
                 self.fail("Filter should have raised PipelineErrorExit and this should not get called.")
             else:
                 return intermediate_result
@@ -139,7 +137,7 @@ class PipelineTestCase(TestCase):
         self.assertIsNotNone(exit_err)
         self.assertEqual(EXIT_RESULT, exit_err.intermediate_result)
 
-        ### Validate the transition filter does not get called after the final stage.
+        # Validate the transition filter does not get called after the final stage.
         self._do_exit_condition_tests(test_filter, FULL_PIPELINE_RESULT_VAL, True)
 
     def test_transition_filter(self):
@@ -163,13 +161,13 @@ class PipelineTestCase(TestCase):
             return intermediate_result + 1
 
         new_pipeline = Pipeline(stage_a, stage_b, stage_c, transition_filters=[trans_filter, second_filter])
-        ### Increase expected result (1*n, n=number of steps - 1)
+        # Increase expected result (1*n, n=number of steps - 1)
         self.assertEqual(new_pipeline.start(True), AFTER_RESULT_TOTAL + 2, "multiple trans filters should get executed")
 
     def _do_exit_condition_tests(self, trans_filter, expected_result, *pipeline_callargs):
         """Run the pipeline and validate filter works as expected.
         """
-        ### SETUP
+        # SETUP
         test_pipeline = Pipeline(stage_a, stage_b, stage_c, transition_filters=trans_filter)
         pipeline_result = test_pipeline.start(*pipeline_callargs)
         self.assertEqual(pipeline_result, expected_result)

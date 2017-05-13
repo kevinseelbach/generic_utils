@@ -1,9 +1,5 @@
 """Module for common web-scraping helper functions / class
 """
-# future/compat
-from builtins import object
-from past.builtins import basestring
-
 import requests
 from bs4 import UnicodeDammit
 from lxml import html

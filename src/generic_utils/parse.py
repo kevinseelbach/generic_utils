@@ -1,10 +1,4 @@
-from __future__ import absolute_import
-from __future__ import division
-
-# future/compat
-from builtins import map
-from builtins import range
-from past.utils import old_div
+from __future__ import absolute_import, division
 
 # stdlib
 import collections
@@ -21,7 +15,7 @@ def split_by_size(s, size, return_remainder=False):
     if not isinstance(size, collections.Iterable):
         # if size is 2, [2, 4, 6, 8, 10...]
         non_iter_size = size
-        size = [non_iter_size for i in range(old_div(len(s),non_iter_size))]
+        size = [non_iter_size for _ in range(int(len(s) / non_iter_size))]
 
     retval = ()
     for i in size:

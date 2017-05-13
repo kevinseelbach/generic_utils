@@ -1,13 +1,12 @@
-'''
-    Various date related utils.
-'''
+"""Various date related utils.
+"""
 
 # stdlib
 from datetime import date
 
 
 def age(birth_date, from_date):
-    if ( from_date is None ):
+    if not from_date:
         from_date = date.today()
 
     try: # raised when birth date is February 29 and the current year is not a leap year

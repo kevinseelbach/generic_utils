@@ -37,9 +37,6 @@ NOTE:  This is not thread safe such that you cannot run multiple tests in parall
 """
 from __future__ import print_function
 
-# future/compat
-from builtins import str
-
 # stdlib
 import multiprocessing
 import os

@@ -1,7 +1,4 @@
 """Utilities for working with Exceptions"""
-# future/compat
-from builtins import next
-
 # stdlib
 from generic_utils import loggingtools
 from generic_utils.classtools import cached_property

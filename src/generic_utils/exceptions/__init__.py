@@ -35,7 +35,8 @@ class GenUtilsException(Exception):
         super(GenUtilsException, self).__init__(self.message)
 
     def _format_message(self, message, args):
-        """Formats the message of the exception
+        """Formats the message of the exception by calling message.format(*) with the attributes 
+        from the exception instance
         """
         if message is None:
             if args:

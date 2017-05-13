@@ -1,10 +1,4 @@
 """Tools for working with iterators"""
-# future/compat
-from builtins import next
-from builtins import object
-from builtins import range
-from builtins import zip
-
 # stdlib
 from inspect import getmembers
 

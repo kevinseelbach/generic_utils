@@ -1,8 +1,5 @@
 """Generic pipeline."""
 # stdlib
-from builtins import object
-from builtins import range
-
 from generic_utils import loggingtools
 from generic_utils.collections.exceptions import InvalidStageException
 from generic_utils.collections.exceptions import PipelineErrorExit
@@ -102,7 +99,7 @@ class Pipeline(object):
         try:
             return self._stage_functions.index(func)
         except ValueError:
-            raise InvalidStageException(func)
+            raise InvalidStageException(stage=func)
 
     def _get_next_stage(self, func=None):
         """Given a stage `func`, gets the next stage or returns None.
@@ -144,7 +141,7 @@ class Pipeline(object):
                           trans_filter, self, stage_func)
                 return False, intermediate_result
             except PipelineErrorExit as exit_signal:
-                LOG.warn(exit_signal.message)
+                LOG.warning(exit_signal.message)
                 LOG.debug("transition filter %r signaled Pipeline=%r should exit with error after stage %r",
                           trans_filter, self, stage_func)
                 ### Re raise the error so the pipeline can record this failure.

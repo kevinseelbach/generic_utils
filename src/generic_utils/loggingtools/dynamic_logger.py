@@ -3,7 +3,6 @@ a logging level manager which allows for runtime log level changes from any log 
 database based, etc)
 """
 # future/compat
-from builtins import str
 
 # stdlib
 from logging import NOTSET as logging_NOTSET

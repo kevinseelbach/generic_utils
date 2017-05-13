@@ -1,8 +1,3 @@
-# future/compat
-from builtins import range
-from builtins import str
-
-
 def baseconv(num, alphabet, minimum_characters=0):
     """
     convert base 10 number to custom base w/ alphabet

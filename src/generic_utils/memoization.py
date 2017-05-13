@@ -1,7 +1,3 @@
-# future/compat
-from builtins import str
-
-
 class Memoize(object):
     """
     Function decorator which will memoize the results of a function call based on the parameters passed to the function

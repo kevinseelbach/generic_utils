@@ -1,9 +1,5 @@
 from __future__ import division
 
-# future/compat
-from builtins import range
-from past.utils import old_div
-
 # stdlib
 import logging
 from unittest import TestCase
@@ -139,7 +135,7 @@ class TestIIterEx(TestCase):
             self.assertEqual(item.b % 3, 0)
             count += 1
 
-        self.assertEqual(count, old_div(len(new_list), 15))
+        self.assertEqual(count, int(len(new_list) / 15))
 
     def test_wrapping_object_attr_in_interable(self):
         """ Validates and documents method for wrapping an object's attribute so that it becomes iterable.
@@ -167,7 +163,7 @@ class TestIIterEx(TestCase):
 
         new_list = [dummy(i, i) for i in range(1, 2)]
         for idx, item in enumerate(iiterex(new_list, dummychild_callback=dummychild_callback)):
-            for idx2, item2 in enumerate(item.dummychild):
+            for _ in enumerate(item.dummychild):
                 pass
 
 
@@ -211,7 +207,7 @@ class IndexOfTestCase(TestCase):
     def test_index_of_first_only_true(self):
         """Validates the behavior of index_of when matching for only the first index within an iterable
         """
-        ### SETUP
+        # SETUP
         TEST_CASES = [
             # (iterable, predicate function, expected_idx)
             ([0, 1, 2, 1], lambda x: x == 1, 1),
@@ -230,8 +226,8 @@ class IndexOfTestCase(TestCase):
     def test_index_of_first_only_false(self):
         """Validates the behavior of index_of when matching for multiple indices within an iterable
         """
-        ### SETUP
-        TEST_CASES = [
+        # SETUP
+        scenarios = [
             # (iterable, predicate function, expected_idx)
             ([0, 1, 2, 1], lambda x: x == 1, [1, 3]),
             ([0, 1, 2, 1], lambda x: x == 2, [2]),
@@ -242,7 +238,7 @@ class IndexOfTestCase(TestCase):
             ([{"a": 0}, {"a": 1}, {"a": 2}, {"a": 1}], lambda x: x["a"] == 3, None),
         ]
 
-        self._do_index_of_test_cases(TEST_CASES, False)
+        self._do_index_of_test_cases(scenarios, False)
 
     def _do_index_of_test_cases(self, test_cases, first_only):
         test_case_idx = 0

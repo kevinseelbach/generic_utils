@@ -1,7 +1,3 @@
-# future/compat
-from past.builtins import basestring
-from builtins import map
-
 # stdlib
 import sys
 from keyword import iskeyword

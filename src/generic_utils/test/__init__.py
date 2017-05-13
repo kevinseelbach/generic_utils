@@ -2,7 +2,6 @@
 """
 # future/compat
 import six
-from builtins import str
 from future.utils import with_metaclass
 
 # stdlib

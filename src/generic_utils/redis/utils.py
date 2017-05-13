@@ -1,9 +1,6 @@
 """
 Utilities for redis
 """
-# future/compat
-from builtins import str
-
 from redis.client import StrictRedis
 
 from generic_utils.config import get_config_value

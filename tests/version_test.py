@@ -1,8 +1,3 @@
-# future/compat
-from builtins import range
-from builtins import str
-from builtins import zip
-
 # stdlib
 import hashlib
 import inspect
